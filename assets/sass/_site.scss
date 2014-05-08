@@ -45,6 +45,7 @@ $logo-height: 383px;
     display: block;
     position: relative;
     text-align: center;
+    font-size: $font-size-h2;
     font-family: $font-family-monospace;
     font-weight: bold;
   }
@@ -58,3 +59,150 @@ $logo-height: 383px;
   min-height: 500px;
   min-width: 100%;
 }
+
+.container {
+  width: 900px;
+  margin: 0 auto;
+  @include clearfix();
+}
+
+#section-locations {
+  background: $brand-primary;
+  color: #fff;
+  position: relative;
+  height: 100%;
+  min-height: 500px;
+  min-width: 100%;
+  .container {
+    padding: 100px 0;
+  }
+  .map {
+    float: left;
+  }
+  .column {
+    width: 40%;
+    float: right;
+  }
+  h3 {
+    text-align: right;
+  }
+  dl {
+    text-align: right;
+    margin-right: 30px;
+  }
+  dt {
+    font-family: $font-family-monospace;
+  }
+  dd {
+    margin-bottom: 20px;
+    font-family: $font-family-sans-serif;
+  }
+}
+
+#section-gender {
+  background: $brand-secondary;
+  color: $gray;
+  position: relative;
+  height: 100%;
+  min-height: 600px;
+  min-width: 100%;
+  .container {
+    padding: 100px 0 0 80px;
+    position: relative;
+  }
+  .gender-split {
+    display: block;
+    float: right;
+  }
+  .caption {
+    position: absolute;
+    width: 50%;
+    top: 400px;
+    left: 40px;
+    p {
+      padding-left: 20px;
+      font-size: $font-size-small;
+    }
+  }
+}
+
+#section-female {
+
+  background: $brand-secondary;
+  color: $gray;
+  position: relative;
+  height: 100%;
+  min-height: 400px;
+  min-width: 100%;
+
+  .container {
+    padding: 80px 0;
+    position: relative;
+  }
+
+  .content {
+    text-align: center;
+    width: 50%;
+    margin: 0 auto 150px auto;
+    p {
+      font-size: $font-size-small;
+    }
+  }
+
+  .laptops {
+    margin: 0 auto;
+    width: 520px;
+//    height: 380px;
+    position: relative;
+    img {
+      display: block;
+      position: absolute;
+    }
+    .laptop-f {
+      right: 0px;
+      top: 0px;
+    }
+    .laptop-m {
+      left: 0;
+      top: 60px;
+    }
+  }
+
+}
+
+#section-months {
+
+  background: $brand-primary;
+  color: #fff;
+  position: relative;
+  height: 100%;
+  min-height: 500px;
+  min-width: 100%;
+  .container {
+    padding: 100px 0;
+    position: relative;
+  }
+  .stick-man {
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    margin-left: -(227px / 2);
+  }
+  .month, .year {
+    position: absolute;
+    top: 240px;
+    font-size: $font-size-h1;
+    font-family: $font-family-monospace;
+    font-weight: bold;
+    color: $brand-primary-alt;
+    text-transform: uppercase;
+  }
+  .month {
+    left: 50px;
+  }
+  .year {
+    right: 50px;
+  }
+
+}
+

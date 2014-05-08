@@ -42,6 +42,110 @@
 
             </section>
 
+            <section id="section-locations">
+
+                <div class="container">
+
+                    <img src="assets/img/map.png" class="map" alt="Map of Scotland" />
+
+                    <div class="column">
+
+                        <h3>Locations</h3>
+
+                        <dl>
+                            <dt>Egestas Sit</dt>
+                            <dd>3 dojos, 123 participants</dd>
+
+                            <dt>Malesuada Fusce Condimentum</dt>
+                            <dd>1 dojo. 10 participants</dd>
+
+                            <dt>Ligula Fusce</dt>
+                            <dd>6 dojos. 100 participants</dd>
+
+                            <dt>Fringilla Elit Tellus Inceptos</dt>
+                            <dd>10 dojos. 150 participants</dd>
+
+                            <dt>Sit Nibh Nullam Dolor</dt>
+                            <dd>3 dojos. 142 participants</dd>
+
+                            <dt>Tellus Venenatis</dt>
+                            <dd>6 dojos. 123 participants</dd>
+
+                        </dl>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section id="section-gender">
+
+                <div class="container">
+
+                    <img src="assets/img/gender.png" class="gender-split" alt="Gender" />
+
+                    <div class="caption">
+
+                        <h3>Ratio</h3>
+
+                        <p>
+                            Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Donec ullamcorper nulla non metus auctor fringilla. Etiam porta sem malesuada magna mollis euismod. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+                        </p>
+
+                    </div>
+
+            </section>
+
+            <section id="section-female">
+
+                <div class="container">
+
+                    <div class="content">
+
+                        <h4>Female Participation</h4>
+
+                        <p>
+                            Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quis risus eget urna mollis ornare vel eu leo. Donec sed odio dui.
+                        </p>
+
+                    </div>
+
+                    <div class="laptops">
+                        <img src="assets/img/laptop_f.png" class="laptop-f" alt="Female Laptop" />
+                        <img src="assets/img/laptop_m.png" class="laptop-m" alt="Male Laptop" />
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section id="section-months">
+
+                <div class="container">
+
+                    <img src="assets/img/man.png" class="stick-man" alt="Man" />
+
+                    <p class="month">
+                        Nov
+                    </p>
+
+                    <p class="year">
+                        2013
+                    </p>
+
+                </div>
+
+            </section>
+
+            <section id="section-report-close" class="section-code">
+
+                <div class="space"></div>
+
+                <code>&lt;/report&gt;</code>
+
+            </section>
+
         </div>
     </div>
     <script>
@@ -54,22 +158,36 @@
                 }
             });
 
-            var code = $('#section-report-open code');
+            var code_open = $('#section-report-open code');
 
             // text properties
             var sceneOptions = {duration: 0, offset: -300};
-            code.wrapEach(/&[a-z0-9]+;|(.)/ig, "<span>$&</span>");// wrap letters
-            code.find('span').hide();
+            code_open.wrapEach(/&[a-z0-9]+;|(.)/ig, "<span>$&</span>");// wrap letters
+            code_open.find('span').hide();
             //code.find('span').css({color: 'blue'});
             scene = new ScrollScene(sceneOptions)
                     .addTo(controller)
                     .triggerHook("onCenter")
-                    .triggerElement(code)
-                    .setTween(TweenMax.staggerTo(code.children("span"), 0.0001, {display: "inline"}, 0.1));
+                    .triggerElement(code_open)
+                    .setTween(TweenMax.staggerTo(code_open.children("span"), 0.0001, {display: "inline"}, 0.1));
                     //.setTween(TweenMax.staggerTo(code.children("span"), 0.001, {color: "red"}, 0.1));
 
             // show indicators (requires debug extension)
             scene.addIndicators();
+
+
+
+            var code_close = $('#section-report-close code');
+
+            // text properties
+            var sceneOptions = {duration: 0, offset: -300};
+            code_close.wrapEach(/&[a-z0-9]+;|(.)/ig, "<span>$&</span>");// wrap letters
+            code_close.find('span').hide();
+            scene = new ScrollScene(sceneOptions)
+                    .addTo(controller)
+                    .triggerHook("onCenter")
+                    .triggerElement(code_close)
+                    .setTween(TweenMax.staggerTo(code_close.children("span"), 0.0001, {display: "inline"}, 0.1));
 
         });
     </script>
