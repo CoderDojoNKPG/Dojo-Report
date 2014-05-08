@@ -9,11 +9,15 @@
 
     <title>Coderdojo Scotland</title>
 
+    <link href='http://fonts.googleapis.com/css?family=Arvo:700|Nunito:400,700|Open+Sans:400,600' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="assets/css/style.css" type="text/css">
 
     <script type="text/javascript" src="assets/js/vendor/jquery.min.js"></script>
     <script type="text/javascript" src="assets/js/vendor/modernizr.min.js"></script>
+    <script type="text/javascript" src="assets/js/vendor/TweenMax.min.js"></script>
+    <script type="text/javascript" src="assets/js/vendor/ScrollToPlugin.min.js"></script>
     <script type="text/javascript" src="assets/js/vendor/jquery.scrollmagic.min.js"></script>
+    <script type="text/javascript" src="assets/js/helpers.js"></script>
 
     <!-- Only for development -->
     <script type="text/javascript" src="assets/js/vendor/jquery.scrollmagic.debug.js"></script>
@@ -29,7 +33,45 @@
                 </div>
 
             </section>
+
+            <section id="section-report-open" class="section-code">
+
+                <div class="space"></div>
+
+                <code>&lt;report&gt;</code>
+
+            </section>
+
         </div>
     </div>
+    <script>
+        var controller;
+        $(document).ready(function($) {
+            // init controller
+            controller = new ScrollMagic({
+                globalSceneOptions: {
+                    triggerHook: "onLeave"
+                }
+            });
+
+            var code = $('#section-report-open code');
+
+            // text properties
+            var sceneOptions = {duration: 0, offset: -300};
+            code.wrapEach(/&[a-z0-9]+;|(.)/ig, "<span>$&</span>");// wrap letters
+            code.find('span').hide();
+            //code.find('span').css({color: 'blue'});
+            scene = new ScrollScene(sceneOptions)
+                    .addTo(controller)
+                    .triggerHook("onCenter")
+                    .triggerElement(code)
+                    .setTween(TweenMax.staggerTo(code.children("span"), 0.0001, {display: "inline"}, 0.1));
+                    //.setTween(TweenMax.staggerTo(code.children("span"), 0.001, {color: "red"}, 0.1));
+
+            // show indicators (requires debug extension)
+            scene.addIndicators();
+
+        });
+    </script>
 </body>
 </html>

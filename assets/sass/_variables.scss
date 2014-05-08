@@ -39,15 +39,15 @@ $link-hover-color:      darken($link-color, 15%) !default;
 
 $font-family-sans-serif:  "brandon-grotesque", "Helvetica Neue", Helvetica-, Arial, sans-serif !default;
 $font-family-serif:       Georgia, "Times New Roman-", Times, serif !default;
-$font-family-monospace:   Monaco, Menlo, Consolas, "Courier- New", monospace !default;
+$font-family-monospace:   "Arvo", Monaco, monospace !default;
 $font-family-base:        $font-family-sans-serif !default;
 
-$font-size-base:          17px !default;
+$font-size-base:          50px !default;
 $font-size-large:         ceil($font-size-base * 1.25) !default; // ~18px
 $font-size-small:         ceil($font-size-base * 0.85) !default; // ~12px
 
-$font-size-h1:            35px !default;
-$font-size-h2:            35px !default;
+$font-size-h1:            80px !default;
+$font-size-h2:            60px !default;
 $font-size-h3:            $font-size-large !default;
 $font-size-h4:            $font-size-base !default;
 $font-size-h5:            $font-size-base !default;
