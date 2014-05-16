@@ -419,23 +419,33 @@ ol {
   ol ol {
     margin-bottom: 0; }
 
-body, html, #wrapper {
+body, html {
   height: 100%; }
 
-.scroll {
-  overflow-y: scroll;
-  overflow-x: hidden;
-  width: 100%;
+#wrapper {
   height: 100%;
-  margin: auto; }
+  min-width: 900px;
+  min-height: 500px; }
+
+section {
+  height: 100%; }
+  section .container {
+    height: 100%;
+    position: absolute;
+    width: 900px;
+    margin: 0 auto; }
+    section .container:before, section .container:after {
+      content: " ";
+      /* 1 */
+      display: table;
+      /* 2 */ }
+    section .container:after {
+      clear: both; }
 
 #section-logo {
   background: #f1ede1;
   text-align: center;
-  position: relative;
-  height: 100%;
-  min-height: 500px;
-  min-width: 100%; }
+  min-height: 500px; }
   #section-logo .logo {
     display: block;
     background: url(../img/logo.png) top left no-repeat;
@@ -462,30 +472,11 @@ body, html, #wrapper {
 
 #section-report-open {
   background: #f1ede1;
-  text-align: center;
-  position: relative;
-  height: 100%;
-  min-height: 500px;
-  min-width: 100%; }
-
-.container {
-  width: 900px;
-  margin: 0 auto; }
-  .container:before, .container:after {
-    content: " ";
-    /* 1 */
-    display: table;
-    /* 2 */ }
-  .container:after {
-    clear: both; }
+  text-align: center; }
 
 #section-locations {
   background: #51b2e4;
-  color: #fff;
-  position: relative;
-  height: 100%;
-  min-height: 500px;
-  min-width: 100%; }
+  color: #fff; }
   #section-locations .container {
     padding: 100px 0; }
   #section-locations .map {
@@ -506,11 +497,7 @@ body, html, #wrapper {
 
 #section-gender {
   background: #f1ede1;
-  color: #777777;
-  position: relative;
-  height: 100%;
-  min-height: 600px;
-  min-width: 100%; }
+  color: #777777; }
   #section-gender .container {
     padding: 100px 0 0 80px;
     position: relative; }
@@ -528,11 +515,7 @@ body, html, #wrapper {
 
 #section-female {
   background: #f1ede1;
-  color: #777777;
-  position: relative;
-  height: 100%;
-  min-height: 400px;
-  min-width: 100%; }
+  color: #777777; }
   #section-female .container {
     padding: 80px 0;
     position: relative; }
@@ -564,11 +547,7 @@ body, html, #wrapper {
 
 #section-months {
   background: #51b2e4;
-  color: #fff;
-  position: relative;
-  height: 100%;
-  min-height: 500px;
-  min-width: 100%; }
+  color: #fff; }
   #section-months .container {
     padding: 100px 0;
     position: relative; }
@@ -587,11 +566,7 @@ body, html, #wrapper {
 
 #section-benefits {
   background: #51b2e4;
-  color: #fff;
-  position: relative;
-  height: 100%;
-  min-height: 500px;
-  min-width: 100%; }
+  color: #fff; }
   #section-benefits .container {
     padding: 100px 0;
     position: relative; }
@@ -616,11 +591,7 @@ body, html, #wrapper {
 
 #section-retention {
   background: #51b2e4;
-  color: #fff;
-  position: relative;
-  height: 100%;
-  min-height: 500px;
-  min-width: 100%; }
+  color: #fff; }
   #section-retention .container {
     padding: 100px 0;
     position: relative; }
@@ -648,11 +619,7 @@ body, html, #wrapper {
     margin-left: -745px; }
 
 #section-mentor-books {
-  background: #f1ede1;
-  position: relative;
-  height: 100%;
-  min-height: 500px;
-  min-width: 100%; }
+  background: #f1ede1; }
   #section-mentor-books .container {
     width: 556px;
     margin: 0 auto;
@@ -673,11 +640,7 @@ body, html, #wrapper {
       top: 516px; }
 
 #section-mentor-heros {
-  background: #f1ede1;
-  position: relative;
-  height: 100%;
-  min-height: 500px;
-  min-width: 100%; }
+  background: #f1ede1; }
   #section-mentor-heros .container {
     padding: 100px 0;
     position: relative; }
@@ -702,17 +665,13 @@ body, html, #wrapper {
       margin-right: 60px; }
 
 #section-share {
-  background: #f1ede1;
-  position: relative;
-  height: 100%;
-  min-height: 500px;
-  min-width: 100%; }
+  background: #f1ede1; }
   #section-share .mobile-canvas {
     position: absolute;
     width: 556px;
     height: 361px;
     background: url(../img/iphone.png) top left no-repeat;
-    top: 50%;
+    top: 40%;
     left: 50%;
     margin-top: -180.5px;
     margin-left: -278px; }

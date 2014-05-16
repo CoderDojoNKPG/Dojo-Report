@@ -23,222 +23,279 @@
     <script type="text/javascript" src="assets/js/vendor/jquery.scrollmagic.debug.js"></script>
 </head>
 <body>
+    <script>
+        var controller;
+        $(document).ready(function($) {
+            controller = new ScrollMagic({
+                globalSceneOptions: {
+                    triggerHook: "onLeave"
+                }
+            });
+        });
+    </script>
     <div id="wrapper">
-        <div class="scroll">
+        <section id="section-logo">
 
-            <section id="section-logo">
+            <div class="container">
 
                 <div class="logo">
                     Coderdojo Scotland
                 </div>
 
-            </section>
+            </div>
 
-            <section id="section-report-open" class="section-code">
+        </section>
+
+        <section id="section-report-open" class="section-code">
+
+            <div class="container">
 
                 <div class="space"></div>
 
                 <code>&lt;report&gt;</code>
 
-            </section>
+            </div>
 
-            <section id="section-locations">
+            <script>
+                $(document).ready(function($) {
+                    var code_open = $('#section-report-open code');
 
-                <div class="container">
+                    // text properties
+                    var sceneOptions = {duration: 200, offset: -100};
+                    $(code_open).wrapEach(/&[a-z0-9]+;|(.)/ig, "<span>$&</span>");// wrap letters
+                    $(code_open).find('span').hide();
+                    //$(code_open).find('span').css({color: 'blue'});
+                    var scene = new ScrollScene()
+                            .addTo(controller)
+                            .triggerHook("onCenter")
+                            .triggerElement(code_open)
+                            .setTween(TweenMax.staggerTo($(code_open).children("span"), 0.0001, {display: "inline"}, 0.1));
+                            //.setTween(TweenMax.staggerTo($(code_open).children("span"), 0.0001, {color: "red"}, 0.1));
 
-                    <img src="assets/img/map.png" class="map" alt="Map of Scotland" />
+                    // show indicators (requires debug extension)
+                    scene.addIndicators();
+                });
+            </script>
 
-                    <div class="column">
+        </section>
 
-                        <h3>Locations</h3>
+        <section id="section-locations">
 
-                        <dl>
-                            <dt>Egestas Sit</dt>
-                            <dd>3 dojos, 123 participants</dd>
+            <div class="container">
 
-                            <dt>Malesuada Fusce Condimentum</dt>
-                            <dd>1 dojo. 10 participants</dd>
+                <img src="assets/img/map.png" class="map" alt="Map of Scotland" />
 
-                            <dt>Ligula Fusce</dt>
-                            <dd>6 dojos. 100 participants</dd>
+                <div class="column">
 
-                            <dt>Fringilla Elit Tellus Inceptos</dt>
-                            <dd>10 dojos. 150 participants</dd>
+                    <h3>Locations</h3>
 
-                            <dt>Sit Nibh Nullam Dolor</dt>
-                            <dd>3 dojos. 142 participants</dd>
+                    <dl>
+                        <dt>Egestas Sit</dt>
+                        <dd>3 dojos, 123 participants</dd>
 
-                            <dt>Tellus Venenatis</dt>
-                            <dd>6 dojos. 123 participants</dd>
+                        <dt>Malesuada Fusce Condimentum</dt>
+                        <dd>1 dojo. 10 participants</dd>
 
-                        </dl>
+                        <dt>Ligula Fusce</dt>
+                        <dd>6 dojos. 100 participants</dd>
 
-                    </div>
+                        <dt>Fringilla Elit Tellus Inceptos</dt>
+                        <dd>10 dojos. 150 participants</dd>
 
-                </div>
+                        <dt>Sit Nibh Nullam Dolor</dt>
+                        <dd>3 dojos. 142 participants</dd>
 
-            </section>
+                        <dt>Tellus Venenatis</dt>
+                        <dd>6 dojos. 123 participants</dd>
 
-            <section id="section-gender">
-
-                <div class="container">
-
-                    <img src="assets/img/gender.png" class="gender-split" alt="Gender" />
-
-                    <div class="caption">
-
-                        <h3>Ratio</h3>
-
-                        <p>
-                            Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Donec ullamcorper nulla non metus auctor fringilla. Etiam porta sem malesuada magna mollis euismod. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-            <section id="section-female">
-
-                <div class="container">
-
-                    <div class="content">
-
-                        <h4>Female Participation</h4>
-
-                        <p>
-                            Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quis risus eget urna mollis ornare vel eu leo. Donec sed odio dui.
-                        </p>
-
-                    </div>
-
-                    <div class="laptops">
-                        <img src="assets/img/laptop_f.png" class="laptop-f" alt="Female Laptop" />
-                        <img src="assets/img/laptop_m.png" class="laptop-m" alt="Male Laptop" />
-                    </div>
+                    </dl>
 
                 </div>
 
-            </section>
+            </div>
 
-            <section id="section-months" class="section-man">
+        </section>
 
-                <div class="container">
+        <section id="section-gender">
 
-                    <img src="assets/img/man.png" class="stick-man" alt="Man" />
+            <div class="container">
 
-                    <p class="month">
-                        Nov
-                    </p>
+                <img src="assets/img/gender.png" class="gender-split" alt="Gender" />
 
-                    <p class="year">
-                        2013
+                <div class="caption">
+
+                    <h3>Ratio</h3>
+
+                    <p>
+                        Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Donec ullamcorper nulla non metus auctor fringilla. Etiam porta sem malesuada magna mollis euismod. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
                     </p>
 
                 </div>
 
-            </section>
+            </div>
 
-            <section id="section-benefits" class="section-man">
+        </section>
 
-                <div class="container">
+        <section id="section-female">
 
-                    <img src="assets/img/man_filled.png" class="stick-man" alt="Man" />
+            <div class="container">
 
-                    <div class="benefit">
-                        <h2>Benefits</h2>
-                        <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur blandit tempus porttitor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo.</p>
-                    </div>
+                <div class="content">
 
-                    <div class="benefit">
-                        <h2>Benefits</h2>
-                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Nullam id dolor id nibh ultricies vehicula ut id elit. Vestibulum id ligula porta felis euismod semper. Etiam porta sem malesuada magna mollis euismod. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p>
-                    </div>
+                    <h4>Female Participation</h4>
+
+                    <p>
+                        Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quis risus eget urna mollis ornare vel eu leo. Donec sed odio dui.
+                    </p>
 
                 </div>
 
-            </section>
-
-            <section id="section-retention" class="section-man">
-
-                <div class="container">
-
-                    <img src="assets/img/man_filled.png" class="stick-man" alt="Man" />
-
-                    <div class="benefit">
-                        <h2>Retention</h2>
-                        <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur blandit tempus porttitor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo.</p>
-                    </div>
-
-                    <img src="assets/img/ticket.png" class="ticket" alt="Tickets" />
-
+                <div class="laptops">
+                    <img src="assets/img/laptop_f.png" class="laptop-f" alt="Female Laptop" />
+                    <img src="assets/img/laptop_m.png" class="laptop-m" alt="Male Laptop" />
                 </div>
+
+            </div>
+
+        </section>
+
+        <section id="section-months" class="section-man">
+
+            <div class="container">
+
+                <img src="assets/img/man.png" class="stick-man" alt="Man" />
+
+                <p class="month">
+                    Nov
+                </p>
+
+                <p class="year">
+                    2013
+                </p>
+
+            </div>
+
+        </section>
+
+        <section id="section-benefits" class="section-man">
+
+            <div class="container">
+
+                <img src="assets/img/man_filled.png" class="stick-man" alt="Man" />
+
+                <div class="benefit">
+                    <h2>Benefits</h2>
+                    <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur blandit tempus porttitor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo.</p>
+                </div>
+
+                <div class="benefit">
+                    <h2>Benefits</h2>
+                    <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Nullam id dolor id nibh ultricies vehicula ut id elit. Vestibulum id ligula porta felis euismod semper. Etiam porta sem malesuada magna mollis euismod. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section id="section-retention" class="section-man">
+
+            <div class="container">
+
+                <img src="assets/img/man_filled.png" class="stick-man" alt="Man" />
+
+                <div class="benefit">
+                    <h2>Retention</h2>
+                    <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur blandit tempus porttitor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo.</p>
+                </div>
+
+                <img src="assets/img/ticket.png" class="ticket" alt="Tickets" />
 
                 <img src="assets/img/tickets.png" class="tickets" alt="Tickets" />
 
-            </section>
+            </div>
 
-            <section id="section-mentor-books">
 
-                <div class="container">
+        </section>
 
-                    <img src="assets/img/book_1.png" class="book" />
-                    <img src="assets/img/book_2.png" class="book" alt="Mentors" />
-                    <img src="assets/img/book_3.png" class="book" />
-                    <img src="assets/img/book_4.png" class="book" />
+        <section id="section-mentor-books">
 
+            <div class="container">
+
+                <img src="assets/img/book_1.png" class="book" />
+                <img src="assets/img/book_2.png" class="book" alt="Mentors" />
+                <img src="assets/img/book_3.png" class="book" />
+                <img src="assets/img/book_4.png" class="book" />
+
+            </div>
+
+        </section>
+
+        <section id="section-mentor-heros">
+
+            <div class="container">
+
+                <div class="leading">
+                    <h2>Mentors</h2>
+                    <p>Nullam id dolor id nibh ultricies vehicula ut id elit. Nulla vitae elit libero, a pharetra augue.</p>
                 </div>
 
-            </section>
+                <img src="assets/img/supermentor.png" class="hero" alt="Superhero Mentors" />
 
-            <section id="section-mentor-heros">
+                <p class="quote">
+                    Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
+                </p>
 
-                <div class="container">
+                <p class="quote">
+                    Sed posuere consectetur est at lobortis. Nulla vitae elit libero, a pharetra augue.
+                </p>
 
-                    <div class="leading">
-                        <h2>Mentors</h2>
-                        <p>Nullam id dolor id nibh ultricies vehicula ut id elit. Nulla vitae elit libero, a pharetra augue.</p>
-                    </div>
+            </div>
 
-                    <img src="assets/img/supermentor.png" class="hero" alt="Superhero Mentors" />
+        </section>
 
-                    <p class="quote">
-                        Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
-                    </p>
+        <section id="section-report-close" class="section-code">
 
-                    <p class="quote">
-                        Sed posuere consectetur est at lobortis. Nulla vitae elit libero, a pharetra augue.
-                    </p>
+            <div class="space"></div>
 
+            <code>&lt;/report&gt;</code>
+
+            <script>
+                $(document).ready(function($) {
+                    var code_close = $('#section-report-close code');
+
+                    // text properties
+                    var sceneOptions = {duration: 200, offset: -100};
+                    $(code_close).wrapEach(/&[a-z0-9]+;|(.)/ig, "<span>$&</span>");// wrap letters
+                    $(code_close).find('span').hide();
+                    //$(code_open).find('span').css({color: 'blue'});
+                    new ScrollScene()
+                            .addTo(controller)
+                            .triggerHook("onCenter")
+                            .triggerElement(code_close)
+                            .setTween(TweenMax.staggerTo($(code_close).children("span"), 0.0001, {display: "inline"}, 0.1));
+
+                });
+            </script>
+
+        </section>
+
+        <section id="section-share">
+
+            <div class="container">
+
+                <div class="mobile-canvas">
                 </div>
 
-            </section>
+                <ul class="share">
+                    <li class="twitter"><a href="https://twitter.com/share" class="twitter-share-button" data-text="CoderDojo Scotland Report" data-via="coderscot" data-related="papertank" data-hashtags="coderdojo">Tweet</a></li>
+                    <li class="facebook"><div class="fb-share-button" data-href="http://report.coderdojo.dev" data-type="button_count"></div></li>
+                    <li class="google"><div class="g-plus" data-action="share" data-annotation="bubble" data-height="24"></div></li>
+                </ul>
 
-            <section id="section-report-close" class="section-code">
+            </div>
 
-                <div class="space"></div>
+        </section>
 
-                <code>&lt;/report&gt;</code>
-
-            </section>
-
-            <section id="section-share">
-
-
-                    <div class="mobile-canvas">
-                    </div>
-
-                    <ul class="share">
-                        <li class="twitter"><a href="https://twitter.com/share" class="twitter-share-button" data-text="CoderDojo Scotland Report" data-via="coderscot" data-related="papertank" data-hashtags="coderdojo">Tweet</a></li>
-                        <li class="facebook"><div class="fb-share-button" data-href="http://report.coderdojo.dev" data-type="button_count"></div></li>
-                        <li class="google"><div class="g-plus" data-action="share" data-annotation="bubble" data-height="24"></div></li>
-                    </ul>
-
-
-            </section>
-
-        </div>
     </div>
     <div id="fb-root"></div>
     <script>(function(d, s, id) {
@@ -257,47 +314,6 @@
             po.src = 'https://apis.google.com/js/platform.js';
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
         })();
-    </script>
-    <script>
-
-        var controller;
-        $(document).ready(function($) {
-
-            // init controller
-            controller = new ScrollMagic({
-                globalSceneOptions: {
-                    triggerHook: "onLeave"
-                }
-            });
-
-            var code_open = $('#section-report-open code');
-
-            // text properties
-            var sceneOptions = {duration: 200, offset: -100};
-            $(code_open).wrapEach(/&[a-z0-9]+;|(.)/ig, "<span>$&</span>");// wrap letters
-            //$(code_open).find('span').hide();
-            $(code_open).find('span').css({color: 'blue'});
-            new ScrollScene(sceneOptions)
-                    .addTo(controller)
-                    .triggerHook("onCenter")
-                    .triggerElement(code_open)
-                    //.setTween(TweenMax.staggerTo($(code_open).children("span"), 0.0001, {display: "inline"}, 0.1));
-                    .setTween(TweenMax.staggerTo($(code_open).children("span"), 0.0001, {color: "red"}, 0.2));
-
-
-//            var code_close = $('#section-report-close code');
-//
-//            // text properties
-//            var sceneOptions = {duration: 0, offset: -200};
-//            code_close.wrapEach(/&[a-z0-9]+;|(.)/ig, "<span>$&</span>");// wrap letters
-//            code_close.find('span').hide();
-//            new ScrollScene(sceneOptions)
-//                    .addTo(controller)
-//                    .triggerHook("onCenter")
-//                    .triggerElement(code_close)
-//                    .setTween(TweenMax.staggerTo(code_close.children("span"), 0.0001, {display: "inline"}, 0.1));
-
-        });
     </script>
 </body>
 </html>
