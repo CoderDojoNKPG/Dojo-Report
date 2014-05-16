@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -95,6 +95,8 @@
 
                     </div>
 
+                </div>
+
             </section>
 
             <section id="section-female">
@@ -120,7 +122,7 @@
 
             </section>
 
-            <section id="section-months">
+            <section id="section-months" class="section-man">
 
                 <div class="container">
 
@@ -138,6 +140,81 @@
 
             </section>
 
+            <section id="section-benefits" class="section-man">
+
+                <div class="container">
+
+                    <img src="assets/img/man_filled.png" class="stick-man" alt="Man" />
+
+                    <div class="benefit">
+                        <h2>Benefits</h2>
+                        <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur blandit tempus porttitor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo.</p>
+                    </div>
+
+                    <div class="benefit">
+                        <h2>Benefits</h2>
+                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Nullam id dolor id nibh ultricies vehicula ut id elit. Vestibulum id ligula porta felis euismod semper. Etiam porta sem malesuada magna mollis euismod. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section id="section-retention" class="section-man">
+
+                <div class="container">
+
+                    <img src="assets/img/man_filled.png" class="stick-man" alt="Man" />
+
+                    <div class="benefit">
+                        <h2>Retention</h2>
+                        <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur blandit tempus porttitor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo.</p>
+                    </div>
+
+                    <img src="assets/img/ticket.png" class="ticket" alt="Tickets" />
+
+                </div>
+
+                <img src="assets/img/tickets.png" class="tickets" alt="Tickets" />
+
+            </section>
+
+            <section id="section-mentor-books">
+
+                <div class="container">
+
+                    <img src="assets/img/book_1.png" class="book" />
+                    <img src="assets/img/book_2.png" class="book" alt="Mentors" />
+                    <img src="assets/img/book_3.png" class="book" />
+                    <img src="assets/img/book_4.png" class="book" />
+
+                </div>
+
+            </section>
+
+            <section id="section-mentor-heros">
+
+                <div class="container">
+
+                    <div class="leading">
+                        <h2>Mentors</h2>
+                        <p>Nullam id dolor id nibh ultricies vehicula ut id elit. Nulla vitae elit libero, a pharetra augue.</p>
+                    </div>
+
+                    <img src="assets/img/supermentor.png" class="hero" alt="Superhero Mentors" />
+
+                    <p class="quote">
+                        Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
+                    </p>
+
+                    <p class="quote">
+                        Sed posuere consectetur est at lobortis. Nulla vitae elit libero, a pharetra augue.
+                    </p>
+
+                </div>
+
+            </section>
+
             <section id="section-report-close" class="section-code">
 
                 <div class="space"></div>
@@ -146,11 +223,46 @@
 
             </section>
 
+            <section id="section-share">
+
+
+                    <div class="mobile-canvas">
+                    </div>
+
+                    <ul class="share">
+                        <li class="twitter"><a href="https://twitter.com/share" class="twitter-share-button" data-text="CoderDojo Scotland Report" data-via="coderscot" data-related="papertank" data-hashtags="coderdojo">Tweet</a></li>
+                        <li class="facebook"><div class="fb-share-button" data-href="http://report.coderdojo.dev" data-type="button_count"></div></li>
+                        <li class="google"><div class="g-plus" data-action="share" data-annotation="bubble" data-height="24"></div></li>
+                    </ul>
+
+
+            </section>
+
         </div>
     </div>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&appId=1423048301292672&version=v2.0";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    <script type="text/javascript">
+        window.___gcfg = {lang: 'en-GB'};
+
+        (function() {
+            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+            po.src = 'https://apis.google.com/js/platform.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+        })();
+    </script>
     <script>
+
         var controller;
         $(document).ready(function($) {
+
             // init controller
             controller = new ScrollMagic({
                 globalSceneOptions: {
@@ -161,33 +273,29 @@
             var code_open = $('#section-report-open code');
 
             // text properties
-            var sceneOptions = {duration: 0, offset: -300};
-            code_open.wrapEach(/&[a-z0-9]+;|(.)/ig, "<span>$&</span>");// wrap letters
-            code_open.find('span').hide();
-            //code.find('span').css({color: 'blue'});
-            scene = new ScrollScene(sceneOptions)
+            var sceneOptions = {duration: 200, offset: -100};
+            $(code_open).wrapEach(/&[a-z0-9]+;|(.)/ig, "<span>$&</span>");// wrap letters
+            //$(code_open).find('span').hide();
+            $(code_open).find('span').css({color: 'blue'});
+            new ScrollScene(sceneOptions)
                     .addTo(controller)
                     .triggerHook("onCenter")
                     .triggerElement(code_open)
-                    .setTween(TweenMax.staggerTo(code_open.children("span"), 0.0001, {display: "inline"}, 0.1));
-                    //.setTween(TweenMax.staggerTo(code.children("span"), 0.001, {color: "red"}, 0.1));
-
-            // show indicators (requires debug extension)
-            scene.addIndicators();
+                    //.setTween(TweenMax.staggerTo($(code_open).children("span"), 0.0001, {display: "inline"}, 0.1));
+                    .setTween(TweenMax.staggerTo($(code_open).children("span"), 0.0001, {color: "red"}, 0.2));
 
 
-
-            var code_close = $('#section-report-close code');
-
-            // text properties
-            var sceneOptions = {duration: 0, offset: -300};
-            code_close.wrapEach(/&[a-z0-9]+;|(.)/ig, "<span>$&</span>");// wrap letters
-            code_close.find('span').hide();
-            scene = new ScrollScene(sceneOptions)
-                    .addTo(controller)
-                    .triggerHook("onCenter")
-                    .triggerElement(code_close)
-                    .setTween(TweenMax.staggerTo(code_close.children("span"), 0.0001, {display: "inline"}, 0.1));
+//            var code_close = $('#section-report-close code');
+//
+//            // text properties
+//            var sceneOptions = {duration: 0, offset: -200};
+//            code_close.wrapEach(/&[a-z0-9]+;|(.)/ig, "<span>$&</span>");// wrap letters
+//            code_close.find('span').hide();
+//            new ScrollScene(sceneOptions)
+//                    .addTo(controller)
+//                    .triggerHook("onCenter")
+//                    .triggerElement(code_close)
+//                    .setTween(TweenMax.staggerTo(code_close.children("span"), 0.0001, {display: "inline"}, 0.1));
 
         });
     </script>

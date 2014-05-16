@@ -170,6 +170,15 @@ $logo-height: 383px;
 
 }
 
+.section-man {
+  .stick-man {
+    position: absolute;
+    top: 150px;
+    left: 50%;
+    margin-left: -(227px / 2);
+  }
+}
+
 #section-months {
 
   background: $brand-primary;
@@ -181,12 +190,6 @@ $logo-height: 383px;
   .container {
     padding: 100px 0;
     position: relative;
-  }
-  .stick-man {
-    position: absolute;
-    top: 100px;
-    left: 50%;
-    margin-left: -(227px / 2);
   }
   .month, .year {
     position: absolute;
@@ -206,3 +209,170 @@ $logo-height: 383px;
 
 }
 
+#section-benefits {
+  background: $brand-primary;
+  color: #fff;
+  position: relative;
+  height: 100%;
+  min-height: 500px;
+  min-width: 100%;
+  .container {
+    padding: 100px 0;
+    position: relative;
+    @include clearfix();
+  }
+  .benefit {
+    display: block;
+    width: 300px;
+    p {
+      margin-left: 10px;
+      font-size: $font-size-small;
+    }
+    &:first-of-type {
+      float: left;
+    }
+    &:last-of-type {
+      float: right;
+      margin-top: 300px;
+    }
+  }
+}
+
+#section-retention {
+  background: $brand-primary;
+  color: #fff;
+  position: relative;
+  height: 100%;
+  min-height: 500px;
+  min-width: 100%;
+  .container {
+    padding: 100px 0;
+    position: relative;
+    @include clearfix();
+  }
+  .benefit {
+    float: left;
+    width: 300px;
+    p {
+      font-size: $font-size-small;
+    }
+  }
+  .ticket {
+    display: block;
+    float: right;
+    margin-right: 20px;
+  }
+  .tickets {
+    display: block;
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    margin-left: -745px;
+  }
+}
+
+$book-width: 556px;
+$book-height: 72px;
+$book-top: 300px;
+
+#section-mentor-books {
+  background: $brand-secondary;
+  position: relative;
+  height: 100%;
+  min-height: 500px;
+  min-width: 100%;
+  .container {
+    width: $book-width;
+    margin: 0 auto;
+    padding: 100px 0;
+    position: relative;
+  }
+  .book {
+    display: block;
+    position: absolute;
+    width: $book-width;
+    height: $book-height;
+    &:nth-of-type(1) {
+      top: $book-top;
+    }
+    &:nth-of-type(2) {
+      top: $book-top + ( $book-height * 1 );
+    }
+    &:nth-of-type(3) {
+      top: $book-top + ( $book-height * 2 );
+    }
+    &:nth-of-type(4) {
+      top: $book-top + ( $book-height * 3 );
+    }
+  }
+}
+
+#section-mentor-heros {
+  background: $brand-secondary;
+  position: relative;
+  height: 100%;
+  min-height: 500px;
+  min-width: 100%;
+  .container {
+    padding: 100px 0;
+    position: relative;
+  }
+  .leading {
+    width: 300px;
+  }
+  .hero {
+    position: absolute;
+    top: 250px;
+    left: 55%;
+    margin-left: -(372px / 2);
+  }
+  .quote {
+    display: block;
+    width: 260px;
+    margin-bottom: 100px;
+    font-size: $font-size-small;
+    clear: both;
+    &:nth-child(even) {
+      float: left;
+      margin-left: 60px;
+    }
+    &:nth-child(odd) {
+      float: right;
+      margin-right: 60px;
+    }
+  }
+}
+
+#section-share {
+  background: $brand-secondary;
+  position: relative;
+  height: 100%;
+  min-height: 500px;
+  min-width: 100%;
+  .mobile-canvas {
+    position: absolute;
+    width: 556px;
+    height: 361px;
+    background: url(../img/iphone.png) top left no-repeat;
+    top: 50%;
+    left: 50%;
+    margin-top: -(361px / 2);
+    margin-left: -(556px / 2);
+  }
+  .share {
+    position: absolute;
+    width: 100%;
+    bottom: 40px;
+    list-style: none;
+    text-align: center;
+    li {
+      width: 100px;
+      display: inline-block;
+    }
+    .facebook {
+      .fb-share-button {
+        top: -8px;
+      }
+    }
+  }
+}
