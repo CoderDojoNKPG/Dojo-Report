@@ -25,7 +25,8 @@
 <body>
     <script>
         var controller;
-        $(document).ready(function($) {
+        var controller;
+        $(function ($) {
             controller = new ScrollMagic({
                 globalSceneOptions: {
                     triggerHook: "onLeave"
@@ -57,7 +58,7 @@
             </div>
 
             <script>
-                $(document).ready(function($) {
+                $(function() {
                     var code_open = $('#section-report-open code');
 
                     // text properties
@@ -114,6 +115,32 @@
 
             </div>
 
+            <script>
+                $(function() {
+                    var map = $('#section-locations .map');
+                    var sceneOptions = {duration: 200, offset: 0};
+                    new ScrollScene(sceneOptions)
+                            .addTo(controller)
+                            .triggerHook("onCenter")
+                            .triggerElement(map)
+                            .setTween(TweenMax.from(map, 1, {
+                                left: "-100%",
+                                marginLeft: -550
+                            }));
+
+                    $('#section-locations dt, #section-locations dd').each(function(){
+
+                        element = $(this);
+
+                        new ScrollScene(sceneOptions)
+                                .addTo(controller)
+                                .triggerHook("onCenter")
+                                .triggerElement(element)
+                                .setTween(TweenMax.from(element, 0.5, {autoAlpha: 0}));
+                    });
+                });
+            </script>
+
         </section>
 
         <section id="section-gender">
@@ -154,6 +181,32 @@
                     <img src="assets/img/laptop_f.png" class="laptop-f" alt="Female Laptop" />
                     <img src="assets/img/laptop_m.png" class="laptop-m" alt="Male Laptop" />
                 </div>
+
+                <script>
+                    $(function() {
+                        var laptop_f = $('#section-female .laptop-f');
+                        var laptop_m = $('#section-female .laptop-m');
+                        var sceneOptions = {duration: 200, offset: 0};
+
+                        new ScrollScene(sceneOptions)
+                                .addTo(controller)
+                                .triggerHook("onCenter")
+                                .triggerElement(laptop_f)
+                                .setTween(TweenMax.from(laptop_f, 1, {
+                                    right: "-100%",
+                                    marginRight: -400
+                                }));
+
+                        new ScrollScene(sceneOptions)
+                                .addTo(controller)
+                                .triggerHook("onCenter")
+                                .triggerElement(laptop_m)
+                                .setTween(TweenMax.from(laptop_m, 1, {
+                                    left: "-100%",
+                                    marginLeft: -400
+                                }));
+                    });
+                </script>
 
             </div>
 
@@ -210,14 +263,29 @@
 
                 <img src="assets/img/ticket.png" class="ticket" alt="Tickets" />
 
-                <img src="assets/img/tickets.png" class="tickets" alt="Tickets" />
-
             </div>
+
+            <script>
+                $(function(){
+                    var retention = new TimelineMax()
+                            .add(TweenMax.from("#section-retention .ticket", 1, {marginTop: "100%"}))
+                            .add(TweenMax.to("#section-retention", 1, {backgroundPosition: "0 100%"}));
+                    // pin
+                    new ScrollScene({
+                            triggerElement: "#section-retention",
+                            duration: 500
+                        })
+                        .setTween(retention)
+                        .addTo(controller);
+                });
+            </script>
 
 
         </section>
 
         <section id="section-mentor-books">
+
+            <div class="trigger"></div>
 
             <div class="container">
 
@@ -227,6 +295,25 @@
                 <img src="assets/img/book_4.png" class="book" />
 
             </div>
+
+            <script>
+                $(function(){
+                    var books = $('#section-mentor-books .book');
+
+                    var book_animation = new TimelineMax()
+                            .add(TweenMax.from(books[2], 1, {top: "-10%", ease: Bounce.easeOut, delay: 0.2}))
+                            .add(TweenMax.from(books[1], 1, {top: "-10%", ease: Bounce.easeOut, delay: 0.2}))
+                            .add(TweenMax.from(books[0], 1, {top: "-10%", ease: Bounce.easeOut, delay: 0.2}))
+
+                    new ScrollScene({
+                        triggerElement: "#section-mentor-books .trigger",
+                        duration: 500
+                    })
+                    .setTween(book_animation)
+                    .addTo(controller);
+
+                });
+            </script>
 
         </section>
 

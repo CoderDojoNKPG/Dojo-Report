@@ -12,8 +12,9 @@ section {
   height: 100%;
   .container {
     height: 100%;
-    position: absolute;
-    width: 900px;
+    position: relative;
+    width: 100%;
+    max-width: 900px;
     margin: 0 auto;
     @include clearfix();
   }
@@ -119,6 +120,7 @@ $logo-height: 383px;
   background: $brand-secondary;
   color: $gray;
 
+
   .container {
     padding: 80px 0;
     position: relative;
@@ -215,10 +217,10 @@ $logo-height: 383px;
 }
 
 #section-retention {
-  background: $brand-primary;
+  background: $brand-primary url(../img/tickets.png) 0 170% repeat-x;
   color: #fff;
   .container {
-    padding: 100px 0;
+    padding: 100px 0 402px 0;
     position: relative;
     @include clearfix();
   }
@@ -233,6 +235,7 @@ $logo-height: 383px;
     display: block;
     float: right;
     margin-right: 20px;
+    margin-top: 0px;
   }
   .tickets {
     display: block;
@@ -249,6 +252,12 @@ $book-top: 300px;
 
 #section-mentor-books {
   background: $brand-secondary;
+  overflow: hidden;
+  .trigger {
+    position: absolute;
+    left: 50%;
+    top: -10%;
+  }
   .container {
     width: $book-width;
     margin: 0 auto;

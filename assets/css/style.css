@@ -431,8 +431,9 @@ section {
   height: 100%; }
   section .container {
     height: 100%;
-    position: absolute;
-    width: 900px;
+    position: relative;
+    width: 100%;
+    max-width: 900px;
     margin: 0 auto; }
     section .container:before, section .container:after {
       content: " ";
@@ -590,10 +591,10 @@ section {
       margin-top: 300px; }
 
 #section-retention {
-  background: #51b2e4;
+  background: #51b2e4 url(../img/tickets.png) 0 170% repeat-x;
   color: #fff; }
   #section-retention .container {
-    padding: 100px 0;
+    padding: 100px 0 402px 0;
     position: relative; }
     #section-retention .container:before, #section-retention .container:after {
       content: " ";
@@ -610,7 +611,8 @@ section {
   #section-retention .ticket {
     display: block;
     float: right;
-    margin-right: 20px; }
+    margin-right: 20px;
+    margin-top: 0px; }
   #section-retention .tickets {
     display: block;
     position: absolute;
@@ -619,7 +621,12 @@ section {
     margin-left: -745px; }
 
 #section-mentor-books {
-  background: #f1ede1; }
+  background: #f1ede1;
+  overflow: hidden; }
+  #section-mentor-books .trigger {
+    position: absolute;
+    left: 50%;
+    top: -2; }
   #section-mentor-books .container {
     width: 556px;
     margin: 0 auto;
