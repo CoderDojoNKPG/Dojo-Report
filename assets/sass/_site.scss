@@ -1,15 +1,18 @@
 body, html{
   height: 100%;
+  width: 100%;
 }
 
 #wrapper {
   height: 100%;
+  width: 100%;
   min-width: 900px;
   min-height: 500px;
 }
 
 section {
   height: 100%;
+  width: 100%;
   .container {
     height: 100%;
     position: relative;
@@ -70,7 +73,7 @@ $logo-height: 383px;
     padding: 100px 0;
   }
   .map {
-    float: left;
+    position: absolute;
   }
   .column {
     width: 40%;
@@ -327,6 +330,14 @@ $book-top: 300px;
     left: 50%;
     margin-top: -(361px / 2);
     margin-left: -(556px / 2);
+    .bubble {
+      display: block;
+      width: 121px;
+      height: 129px;
+      position: absolute;
+      top: -116px;
+      left: 238px;
+    }
   }
   .share {
     position: absolute;

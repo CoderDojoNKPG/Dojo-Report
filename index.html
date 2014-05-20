@@ -74,7 +74,7 @@
                             //.setTween(TweenMax.staggerTo($(code_open).children("span"), 0.0001, {color: "red"}, 0.1));
 
                     // show indicators (requires debug extension)
-                    scene.addIndicators();
+                    //scene.addIndicators();
                 });
             </script>
 
@@ -124,7 +124,7 @@
                             .triggerHook("onCenter")
                             .triggerElement(map)
                             .setTween(TweenMax.from(map, 1, {
-                                left: "-100%",
+                                left: "-500%",
                                 marginLeft: -550
                             }));
 
@@ -161,6 +161,30 @@
 
             </div>
 
+            <script>
+                $(function(){
+
+                    var sceneOptions = {duration: 200, offset: 0};
+
+                    var gender_image = $('#section-gender .gender-split');
+                    var gender_caption = $('#section-gender .caption');
+
+                    var gender_animation = new TimelineMax()
+                            .add(TweenMax.from(gender_image, 1, {autoAlpha: 0}))
+                            .add(TweenMax.from(gender_caption, 1, {autoAlpha: 0}));
+
+
+                    new ScrollScene({
+                            triggerElement: "#section-gender",
+                            duration: 1000
+                        })
+                        .setTween(gender_animation)
+                        .setPin($('#section-gender'))
+                        .addTo(controller);
+
+                });
+            </script>
+
         </section>
 
         <section id="section-female">
@@ -186,25 +210,25 @@
                     $(function() {
                         var laptop_f = $('#section-female .laptop-f');
                         var laptop_m = $('#section-female .laptop-m');
-                        var sceneOptions = {duration: 200, offset: 0};
 
-                        new ScrollScene(sceneOptions)
-                                .addTo(controller)
-                                .triggerHook("onCenter")
-                                .triggerElement(laptop_f)
-                                .setTween(TweenMax.from(laptop_f, 1, {
+                        var female_animation = new TimelineMax()
+                                .add(TweenMax.from(laptop_f, 1, {
                                     right: "-100%",
                                     marginRight: -400
-                                }));
-
-                        new ScrollScene(sceneOptions)
-                                .addTo(controller)
-                                .triggerHook("onCenter")
-                                .triggerElement(laptop_m)
-                                .setTween(TweenMax.from(laptop_m, 1, {
+                                }))
+                                .add(TweenMax.from(laptop_m, 1, {
                                     left: "-100%",
                                     marginLeft: -400
                                 }));
+
+
+                        new ScrollScene({
+                                triggerElement: "#section-female",
+                                duration: 1000
+                            })
+                            .setTween(female_animation)
+                            .setPin($('#section-female'))
+                            .addTo(controller);
                     });
                 </script>
 
@@ -285,8 +309,6 @@
 
         <section id="section-mentor-books">
 
-            <div class="trigger"></div>
-
             <div class="container">
 
                 <img src="assets/img/book_1.png" class="book" />
@@ -306,10 +328,11 @@
                             .add(TweenMax.from(books[0], 1, {top: "-10%", ease: Bounce.easeOut, delay: 0.2}))
 
                     new ScrollScene({
-                        triggerElement: "#section-mentor-books .trigger",
+                        triggerElement: $("#section-mentor-books"),
                         duration: 500
                     })
                     .setTween(book_animation)
+                    .setPin($('#section-mentor-books'))
                     .addTo(controller);
 
                 });
@@ -371,6 +394,7 @@
             <div class="container">
 
                 <div class="mobile-canvas">
+                    <img src="assets/img/twitter.png" class="bubble" />
                 </div>
 
                 <ul class="share">
@@ -380,6 +404,28 @@
                 </ul>
 
             </div>
+
+            <script>
+                $(function() {
+
+                    var bubble = $('#section-share .bubble');
+
+                    new ScrollScene({
+                                offset: -300
+                            })
+                            .setTween(TweenMax.from(bubble, 1, {
+                                autoAlpha: 0,
+                                left: "-=60",
+                                top: "+=50",
+                                scale: 0.2,
+                                ease: Elastic.easeOut
+                            }))
+                            .triggerHook("onCenter")
+                            .triggerElement(bubble)
+                            .addTo(controller);
+
+                });
+            </script>
 
         </section>
 
