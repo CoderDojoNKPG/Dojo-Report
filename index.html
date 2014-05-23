@@ -118,26 +118,21 @@
             <script>
                 $(function() {
                     var map = $('#section-locations .map');
-                    var sceneOptions = {duration: 200, offset: 0};
-                    new ScrollScene(sceneOptions)
-                            .addTo(controller)
-                            .triggerHook("onCenter")
-                            .triggerElement(map)
-                            .setTween(TweenMax.from(map, 1, {
-                                left: "-500%",
-                                marginLeft: -550
-                            }));
+                    var locations = $('#section-locations dt, #section-locations dd');
 
-                    $('#section-locations dt, #section-locations dd').each(function(){
+                    console.log(locations);
 
-                        element = $(this);
+                    var locations_animation = new TimelineMax()
+                            .add(TweenMax.from(map, 1, {left: "-500%",marginLeft: -550}))
+                            .add(TweenMax.staggerFrom(locations, 1, {autoAlpha: 0}, 0.1));
 
-                        new ScrollScene(sceneOptions)
-                                .addTo(controller)
-                                .triggerHook("onCenter")
-                                .triggerElement(element)
-                                .setTween(TweenMax.from(element, 0.5, {autoAlpha: 0}));
-                    });
+                    new ScrollScene({
+                            triggerElement: '#section-locations',
+                            duration: 500
+                        })
+                        .setTween(locations_animation)
+                        .setPin($('#section-locations'))
+                        .addTo(controller);
                 });
             </script>
 
