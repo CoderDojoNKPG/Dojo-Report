@@ -120,8 +120,6 @@
                     var map = $('#section-locations .map');
                     var locations = $('#section-locations dt, #section-locations dd');
 
-                    console.log(locations);
-
                     var locations_animation = new TimelineMax()
                             .add(TweenMax.from(map, 1, {left: "-500%",marginLeft: -550}))
                             .add(TweenMax.staggerFrom(locations, 1, {autoAlpha: 0}, 0.1));
@@ -231,21 +229,94 @@
 
         </section>
 
-        <section id="section-months" class="section-man">
+        <section id="section-months">
 
             <div class="container">
 
-                <img src="assets/img/man.png" class="stick-man" alt="Man" />
+                <div class="chart">
+                    <img src="assets/img/stick_man_mask.png" class="mask" alt="Man" />
+                    <div class="progress"></div>
+                </div>
 
-                <p class="month">
-                    Nov
-                </p>
+                <div class="dates dates-2013">
+                    <p class="year">2013</p>
+                    <ul class="months">
+                        <li data-progress="10">Nov</li>
+                        <li data-progress="30">Dec</li>
+                    </ul>
+                </div>
 
-                <p class="year">
-                    2013
-                </p>
+                <div class="dates dates-2014">
+                    <p class="year">2014</p>
+                    <ul class="months">
+                        <li data-progress="60">Jan</li>
+                        <li data-progress="100">Feb</li>
+                    </ul>
+                </div>
 
             </div>
+
+            <script>
+                $(function(){
+
+                    var section_months = $('#section-months');
+
+                    section_months.css({height:'100%'});
+                    chart = $('.chart .progress', section_months);
+                    $('.dates', section_months).css({position: 'absolute', top: 0});
+                    $('.months li', section_months).css({position: 'absolute'});
+
+//                    console.log($('.dates-2013 .year', section_months));
+//                    console.log($('.dates-2013 .months li:first-child', section_months));
+
+                    var months_animation = new TimelineMax()
+                            .add([
+                                TweenMax.from($('.dates-2013 .year', section_months), 0.5, {top: "100%"}),
+                                TweenMax.from($('.dates-2013 .months li:first-child', section_months), 0.5, {top: "100%"}),
+                                TweenMax.to(chart, 0.5, {height: $('.dates-2013 .months li:first-child', section_months).data('progress')+'%' })
+                            ]);
+
+                    var months_2013 = $('.dates-2013 .months li');
+
+                    $(months_2013).each(function(index){
+                        if ( index == 0 ) return true;
+                        console.log(months_2013[index]);
+                        months_animation.add([
+                            TweenMax.to(months_2013[index - 1], 0.5, {top: "-100%"}),
+                            TweenMax.from(months_2013[index], 0.5, {top:"100%"}),
+                            TweenMax.to(chart, 0.5, {height: $(this).data('progress')+'%' })
+                        ]);
+                    });
+
+                    months_animation.add([
+                        TweenMax.to($('.dates-2013 .year', section_months), 0.5, {top: "-100%"}),
+                        TweenMax.to($('.dates-2013 .months li:last-child', section_months), 0.5, {top: "-100%"}),
+                        TweenMax.from($('.dates-2014 .year', section_months), 0.5, {top: "100%"}),
+                        TweenMax.from($('.dates-2014 .months li:first-child', section_months), 0.5, {top: "100%"}),
+                        TweenMax.to(chart, 0.5, {height: $('.dates-2014 .months li:first-child', section_months).data('progress')+'%' })
+                    ]);
+
+                    var months_2014 = $('.dates-2014 .months li');
+
+                    $(months_2014).each(function(index){
+                        if ( index == 0 ) return true;
+                        months_animation.add([
+                            TweenMax.to(months_2014[index - 1], 0.5, {top: "-100%"}),
+                            TweenMax.from(months_2014[index], 0.5, {top:"100%"}),
+                            TweenMax.to(chart, 0.5, {height: $(this).data('progress')+'%' })
+                        ]);
+                    });
+
+                    // pin
+                    new ScrollScene({
+                            triggerElement: "#section-months",
+                            duration: 1100
+                        })
+                        .setTween(months_animation)
+                        .setPin("#section-months")
+                        .addTo(controller);
+                });
+            </script>
 
         </section>
 

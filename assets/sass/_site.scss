@@ -169,27 +169,60 @@ $logo-height: 383px;
 }
 
 #section-months {
-
+  height: auto;
   background: $brand-primary;
   color: #fff;
   .container {
-    padding: 100px 0;
     position: relative;
   }
-  .month, .year {
+  .chart {
     position: absolute;
-    top: 240px;
+    background: $brand-primary-alt;
+    top: 150px;
+    left: 50%;
+    width: 227px;
+    height: 439px;
+    margin-left: -(227px / 2);
+    .mask {
+      position: absolute;
+      z-index: 200;
+    }
+    .progress {
+      display: block;
+      position: absolute;
+      background: #fff;
+      bottom: 0px;
+      height: 0%;
+      width: 100%;
+      z-index: 100;
+    }
+  }
+  .chart, .dates li, .dates .year {
+    margin-top: 100px;
+  }
+  .dates {
+    padding: 100px 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
     font-size: $font-size-h1;
     font-family: $font-family-monospace;
     font-weight: bold;
     color: $brand-primary-alt;
     text-transform: uppercase;
   }
-  .month {
-    left: 50px;
-  }
   .year {
+    position: absolute;
+    top: 10%;
     right: 50px;
+  }
+  .months {
+    margin: 0;
+    li {
+      display: block;
+      margin-bottom: 40px;
+    }
   }
 
 }

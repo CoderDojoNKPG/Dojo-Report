@@ -550,23 +550,52 @@ section {
   margin-left: -113.5px; }
 
 #section-months {
+  height: auto;
   background: #51b2e4;
   color: #fff; }
   #section-months .container {
-    padding: 100px 0;
     position: relative; }
-  #section-months .month, #section-months .year {
+  #section-months .chart {
     position: absolute;
-    top: 240px;
+    background: #2f6f9b;
+    top: 150px;
+    left: 50%;
+    width: 227px;
+    height: 439px;
+    margin-left: -113.5px; }
+    #section-months .chart .mask {
+      position: absolute;
+      z-index: 200; }
+    #section-months .chart .progress {
+      display: block;
+      position: absolute;
+      background: #fff;
+      bottom: 0px;
+      height: 0%;
+      width: 100%;
+      z-index: 100; }
+  #section-months .chart, #section-months .dates li, #section-months .dates .year {
+    margin-top: 100px; }
+  #section-months .dates {
+    padding: 100px 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
     font-size: 80px;
     font-family: "Arvo", Monaco, monospace;
     font-weight: bold;
     color: #2f6f9b;
     text-transform: uppercase; }
-  #section-months .month {
-    left: 50px; }
   #section-months .year {
+    position: absolute;
+    top: 10%;
     right: 50px; }
+  #section-months .months {
+    margin: 0; }
+    #section-months .months li {
+      display: block;
+      margin-bottom: 40px; }
 
 #section-benefits {
   background: #51b2e4;
