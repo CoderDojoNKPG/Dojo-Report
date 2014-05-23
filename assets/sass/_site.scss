@@ -224,61 +224,51 @@ $logo-height: 383px;
       margin-bottom: 40px;
     }
   }
-
-}
-
-#section-benefits {
-  background: $brand-primary;
-  color: #fff;
-  .container {
-    padding: 100px 0;
-    position: relative;
-    @include clearfix();
+  .retention, .benefits {
+    padding-top: 100px;
   }
-  .benefit {
-    display: block;
-    width: 300px;
-    p {
-      margin-left: 10px;
-      font-size: $font-size-small;
-    }
-    &:first-of-type {
+  .benefits {
+    width: 100%;
+    .benefit {
+      display: block;
+      width: 300px;
+      p {
+        margin-left: 10px;
+        font-size: $font-size-small;
+      }
       float: left;
+      clear: both;
+      &:nth-of-type(even) {
+        float: right;
+        margin-top: 50px;
+      }
     }
-    &:last-of-type {
+  }
+  .retention {
+    width: 100%;
+    .content {
+      float: left;
+      width: 300px;
+      p {
+        font-size: $font-size-small;
+      }
+    }
+    .ticket {
+      display: block;
       float: right;
-      margin-top: 300px;
+      margin-right: 20px;
+      margin-top: 100px;
     }
-  }
-}
-
-#section-retention {
-  background: $brand-primary url(../img/tickets.png) 0 170% repeat-x;
-  color: #fff;
-  .container {
-    padding: 100px 0 402px 0;
-    position: relative;
-    @include clearfix();
-  }
-  .benefit {
-    float: left;
-    width: 300px;
-    p {
-      font-size: $font-size-small;
-    }
-  }
-  .ticket {
-    display: block;
-    float: right;
-    margin-right: 20px;
-    margin-top: 0px;
   }
   .tickets {
+    background: url(../img/tickets.png) top left repeat-x;
+    width: 100%;
+    height: 402px;
     display: block;
     position: absolute;
-    bottom: 0px;
-    left: 50%;
-    margin-left: -745px;
+    bottom: -402px;
+    left: 0;
+    z-index: 300;
   }
 }
 
