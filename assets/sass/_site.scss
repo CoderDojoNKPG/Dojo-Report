@@ -237,10 +237,9 @@ $logo-height: 383px;
         font-size: $font-size-small;
       }
       float: left;
-      clear: both;
       &:nth-of-type(even) {
         float: right;
-        margin-top: 50px;
+        margin-top: 200px;
       }
     }
   }
@@ -365,9 +364,14 @@ $book-top: 300px;
   .share {
     position: absolute;
     width: 100%;
-    bottom: 40px;
-    list-style: none;
+    bottom: 80px;
     text-align: center;
+    h3 {
+      font-size: $font-size-large;
+    }
+    ul {
+      list-style: none;
+    }
     li {
       width: 100px;
       display: inline-block;

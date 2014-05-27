@@ -603,14 +603,13 @@ section {
     #section-months .benefits .benefit {
       display: block;
       width: 300px;
-      float: left;
-      clear: both; }
+      float: left; }
       #section-months .benefits .benefit p {
         margin-left: 10px;
         font-size: 17px; }
       #section-months .benefits .benefit:nth-of-type(even) {
         float: right;
-        margin-top: 50px; }
+        margin-top: 200px; }
   #section-months .retention {
     width: 100%; }
     #section-months .retention .content {
@@ -705,9 +704,12 @@ section {
   #section-share .share {
     position: absolute;
     width: 100%;
-    bottom: 40px;
-    list-style: none;
+    bottom: 80px;
     text-align: center; }
+    #section-share .share h3 {
+      font-size: 25px; }
+    #section-share .share ul {
+      list-style: none; }
     #section-share .share li {
       width: 100px;
       display: inline-block; }

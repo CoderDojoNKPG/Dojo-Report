@@ -341,7 +341,7 @@
                     // pin
                     new ScrollScene({
                             triggerElement: "#section-months",
-                            duration: 1100
+                            duration: 6000
                         })
                         .setTween(months_animation)
                         .setPin("#section-months")
@@ -373,7 +373,7 @@
 
                     new ScrollScene({
                         triggerElement: $("#section-mentor-books"),
-                        duration: 500
+                        duration: 1000
                     })
                     .setTween(book_animation)
                     .setPin($('#section-mentor-books'))
@@ -409,35 +409,17 @@
                 $(function() {
                     var quotes = $('#section-mentor-heros .quote');
 
-                    var hero_hovering_animation = new TimelineMax({repeat: -1, yoyo: true})
-                            .add(TweenMax.to("#section-mentor-heros .hero", 0.25, {top: "+=3", left: "-=2", rotation: -0.5}))
-                            .add(TweenMax.to("#section-mentor-heros .hero", 0.25, {top: "-=6", left: "+=2", rotation: 0}))
-                            .add(TweenMax.to("#section-mentor-heros .hero", 0.25, {top: "+=3", left: "+=2", rotation: 0.5}))
-                            .add(TweenMax.to("#section-mentor-heros .hero", 0.25, {top: "-=3", left: "-=3", rotation: 1}))
-                            .add(TweenMax.to("#section-mentor-heros .hero", 0.25, {top: "+=3", left: "+=1", rotation: -1}))
-                            .add(TweenMax.to("#section-mentor-heros .hero", 0.25, {top: "+=3", left: "+=3", rotation: 0}))
-                            .add(TweenMax.to("#section-mentor-heros .hero", 0.25, {top: "-=2"}));
-
                     var hero_animation = new TimelineMax()
                             .add(TweenMax.from('#section-mentor-heros .hero', 1, {left: "150%", top: '100%', ease: Back.easeOut}))
                             .add(TweenMax.staggerFrom(quotes, 1, {autoAlpha: 0}, 0.1));
 
                     new ScrollScene({
                             triggerElement: '#section-mentor-heros',
-                            duration: 500
+                            duration: 1000
                         })
                         .setTween(hero_animation)
                         .setPin('#section-mentor-heros')
                         .addTo(controller);
-
-                    new ScrollScene({
-                                triggerElement: '#section-mentor-heros',
-                                duration: 300,
-                                offset: 500
-                            })
-                            .setTween(hero_hovering_animation)
-                            .setPin('#section-mentor-heros')
-                            .addTo(controller);
 
                 });
             </script>
@@ -478,11 +460,14 @@
                     <img src="assets/img/twitter.png" class="bubble" />
                 </div>
 
-                <ul class="share">
-                    <li class="twitter"><a href="https://twitter.com/share" class="twitter-share-button" data-text="CoderDojo Scotland Report" data-via="coderscot" data-related="papertank" data-hashtags="coderdojo">Tweet</a></li>
-                    <li class="facebook"><div class="fb-share-button" data-href="http://report.coderdojo.dev" data-type="button_count"></div></li>
-                    <li class="google"><div class="g-plus" data-action="share" data-annotation="bubble" data-height="24"></div></li>
-                </ul>
+                <div class="share">
+                   <h3>Share our report:</h3>
+                    <ul>
+                        <li class="twitter"><a href="https://twitter.com/share" class="twitter-share-button" data-text="CoderDojo Scotland Report" data-via="coderscot" data-related="papertank" data-hashtags="coderdojo">Tweet</a></li>
+                        <li class="facebook"><div class="fb-share-button" data-href="http://report.coderdojo.dev" data-type="button_count"></div></li>
+                        <li class="google"><div class="g-plus" data-action="share" data-annotation="bubble" data-height="24"></div></li>
+                    </ul>
+                </div>
 
             </div>
 
