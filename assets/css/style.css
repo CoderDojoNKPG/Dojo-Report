@@ -423,6 +423,15 @@ body, html {
   height: 100%;
   width: 100%; }
 
+.scroll-container {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  min-width: 850px;
+  width: 100%; }
+
+.scroll-content {
+  position: relative; }
+
 #wrapper {
   height: 100%;
   width: 100%;
