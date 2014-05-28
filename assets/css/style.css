@@ -607,6 +607,11 @@ section {
     #section-months .months li {
       display: block;
       margin-bottom: 40px; }
+    #section-months .months small {
+      display: block;
+      font-size: 20px;
+      font-family: "brandon-grotesque", "Helvetica Neue", Helvetica-, Arial, sans-serif;
+      text-transform: none; }
   #section-months .retention, #section-months .benefits {
     padding-top: 100px; }
   #section-months .benefits {
@@ -684,11 +689,10 @@ section {
   #section-mentor-heros .quote {
     display: block;
     width: 260px;
-    margin-bottom: 100px;
-    font-size: 17px;
-    clear: both; }
+    font-size: 17px; }
     #section-mentor-heros .quote:nth-child(even) {
       float: left;
+      margin-top: 100px;
       margin-left: 60px; }
     #section-mentor-heros .quote:nth-child(odd) {
       float: right;

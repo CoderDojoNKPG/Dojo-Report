@@ -235,6 +235,12 @@ $logo-height: 383px;
       display: block;
       margin-bottom: 40px;
     }
+    small {
+      display: block;
+      font-size: $font-size-base;
+      font-family: $font-family-base;
+      text-transform: none;
+    }
   }
   .retention, .benefits {
     padding-top: 100px;
@@ -339,11 +345,10 @@ $book-top: 300px;
   .quote {
     display: block;
     width: 260px;
-    margin-bottom: 100px;
     font-size: $font-size-small;
-    clear: both;
     &:nth-child(even) {
       float: left;
+      margin-top: 100px;
       margin-left: 60px;
     }
     &:nth-child(odd) {
