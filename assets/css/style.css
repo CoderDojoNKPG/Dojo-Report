@@ -423,6 +423,15 @@ body, html {
   height: 100%;
   width: 100%; }
 
+.scroll-container {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  min-width: 850px;
+  width: 100%; }
+
+.scroll-content {
+  position: relative; }
+
 #wrapper {
   height: 100%;
   width: 100%;
@@ -565,7 +574,9 @@ section {
     margin-left: -113.5px; }
     #section-months .chart .mask {
       position: absolute;
-      z-index: 200; }
+      z-index: 200;
+      width: 100%;
+      height: 100%; }
     #section-months .chart .progress {
       display: block;
       position: absolute;

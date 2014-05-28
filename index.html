@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
+    <meta name="viewport" content="width=900" />
     <meta name="author"	content="papertank.co.uk" />
     <meta name="designer" content="papertank.co.uk" />
 
@@ -16,6 +17,7 @@
     <script type="text/javascript" src="assets/js/vendor/modernizr.min.js"></script>
     <script type="text/javascript" src="assets/js/vendor/TweenMax.min.js"></script>
     <script type="text/javascript" src="assets/js/vendor/ScrollToPlugin.min.js"></script>
+    <script type="text/javascript" src="assets/js/vendor/iscroll.js"></script>
     <script type="text/javascript" src="assets/js/vendor/jquery.scrollmagic.min.js"></script>
     <script type="text/javascript" src="assets/js/helpers.js"></script>
 
@@ -23,15 +25,71 @@
     <script type="text/javascript" src="assets/js/vendor/jquery.scrollmagic.debug.js"></script>
 </head>
 <body>
-    <script>
-        var controller;
-        controller = new ScrollMagic({
-            globalSceneOptions: {
-                triggerHook: "onLeave"
-            }
-        });
-    </script>
     <div id="wrapper">
+        <script>
+            var controller;
+            if (Modernizr.touch) {
+                var scroller;
+                $(document).ready(function () {
+                    // wrap for iscroll
+                    $("#wrapper")
+                            .addClass("scroll-container")
+                            .wrapInner('<div class="scroll-content"></div>');
+
+                    // add iScroll
+                    scroller = new IScroll('#wrapper', {
+                        scrollX: false,
+                        scrollY: true,
+                        scrollbars: true,
+                        useTransform: false,
+                        useTransition: false,
+                        probeType: 3
+                    });
+
+                    // update container on scroll
+                    scroller.on("scroll", function () {
+                        controller.update();
+                    });
+
+                    // overwrite scroll position calculation to use child's offset instead of parents scrollTop();
+                    controller.scrollPos(function () {
+                        return -scroller.y;
+                    });
+
+                    // refresh height, so all is included.
+                    setTimeout(function () {
+                        scroller.refresh();
+                    }, 0);
+
+                    $("#wrapper").on("touchend", "a", function (e) {
+                        // a bit dirty workaround for links not working in iscroll for some reason...
+                        e.preventDefault();
+                        window.location.href = $(this).attr("href");
+                    });
+
+                    // manual set height (so height 100% is available within scroll container)
+                    $(document).on("orientationchange", function () {
+                        $("section, .scrollmagic-pin-spacer, .container")
+                                .css("min-height", $(window).height())
+                    });
+                    $(document).trigger("orientationchange"); // trigger to init
+                });
+                // init the controller
+            controller = new ScrollMagic({
+                container: "#wrapper",
+                globalSceneOptions: {
+                    triggerHook: "onLeave"
+                }
+            });
+        } else {
+            controller = new ScrollMagic({
+                globalSceneOptions: {
+                    triggerHook: "onLeave"
+                }
+            });
+        }
+    </script>
+
         <section id="section-logo">
 
             <div class="container">
@@ -55,24 +113,22 @@
             </div>
 
             <script>
-                $(function() {
-                    var code_open = $('#section-report-open code');
+                var code_open = $('#section-report-open code');
 
-                    // text properties
-                    var sceneOptions = {duration: 200, offset: -100};
-                    $(code_open).wrapEach(/&[a-z0-9]+;|(.)/ig, "<span>$&</span>");// wrap letters
-                    $(code_open).find('span').hide();
-                    //$(code_open).find('span').css({color: 'blue'});
-                    var scene = new ScrollScene()
-                            .addTo(controller)
-                            .triggerHook("onCenter")
-                            .triggerElement(code_open)
-                            .setTween(TweenMax.staggerTo($(code_open).children("span"), 0.0001, {display: "inline"}, 0.1));
-                            //.setTween(TweenMax.staggerTo($(code_open).children("span"), 0.0001, {color: "red"}, 0.1));
+                // text properties
+                var sceneOptions = {duration: 200, offset: -100};
+                $(code_open).wrapEach(/&[a-z0-9]+;|(.)/ig, "<span>$&</span>");// wrap letters
+                $(code_open).find('span').hide();
+                //$(code_open).find('span').css({color: 'blue'});
+                var scene = new ScrollScene()
+                        .addTo(controller)
+                        .triggerHook("onCenter")
+                        .triggerElement(code_open)
+                        .setTween(TweenMax.staggerTo($(code_open).children("span"), 0.0001, {display: "inline"}, 0.1));
+                        //.setTween(TweenMax.staggerTo($(code_open).children("span"), 0.0001, {color: "red"}, 0.1));
 
-                    // show indicators (requires debug extension)
-                    //scene.addIndicators();
-                });
+                // show indicators (requires debug extension)
+                //scene.addIndicators();
             </script>
 
         </section>
@@ -113,22 +169,20 @@
             </div>
 
             <script>
-                $(function() {
-                    var map = $('#section-locations .map');
-                    var locations = $('#section-locations dt, #section-locations dd');
+                var map = $('#section-locations .map');
+                var locations = $('#section-locations dt, #section-locations dd');
 
-                    var locations_animation = new TimelineMax()
-                            .add(TweenMax.from(map, 1, {left: "-500%",marginLeft: -550}))
-                            .add(TweenMax.staggerFrom(locations, 1, {autoAlpha: 0}, 0.1));
+                var locations_animation = new TimelineMax()
+                        .add(TweenMax.from(map, 1, {left: "-500%",marginLeft: -550}))
+                        .add(TweenMax.staggerFrom(locations, 1, {autoAlpha: 0}, 0.1));
 
-                    new ScrollScene({
-                            triggerElement: '#section-locations',
-                            duration: 500
-                        })
-                        .setTween(locations_animation)
-                        .setPin($('#section-locations'))
-                        .addTo(controller);
-                });
+                new ScrollScene({
+                        triggerElement: '#section-locations',
+                        duration: 500
+                    })
+                    .setTween(locations_animation)
+                    .setPin($('#section-locations'))
+                    .addTo(controller);
             </script>
 
         </section>
@@ -152,27 +206,21 @@
             </div>
 
             <script>
-                $(function(){
+                var gender_image = $('#section-gender .gender-split');
+                var gender_caption = $('#section-gender .caption');
 
-                    var sceneOptions = {duration: 200, offset: 0};
-
-                    var gender_image = $('#section-gender .gender-split');
-                    var gender_caption = $('#section-gender .caption');
-
-                    var gender_animation = new TimelineMax()
-                            .add(TweenMax.from(gender_image, 1, {autoAlpha: 0}))
-                            .add(TweenMax.from(gender_caption, 1, {autoAlpha: 0}));
+                var gender_animation = new TimelineMax()
+                        .add(TweenMax.from(gender_image, 1, {autoAlpha: 0}))
+                        .add(TweenMax.from(gender_caption, 1, {autoAlpha: 0}));
 
 
-                    new ScrollScene({
-                            triggerElement: "#section-gender",
-                            duration: 1000
-                        })
-                        .setTween(gender_animation)
-                        .setPin($('#section-gender'))
-                        .addTo(controller);
-
-                });
+                new ScrollScene({
+                        triggerElement: "#section-gender",
+                        duration: 1000
+                    })
+                    .setTween(gender_animation)
+                    .setPin($('#section-gender'))
+                    .addTo(controller);
             </script>
 
         </section>
@@ -197,22 +245,20 @@
                 </div>
 
                 <script>
-                    $(function() {
-                        var laptop_animation = new TimelineMax()
-                                .add([
-                                    TweenMax.from('#section-female .laptop-f', 1, {right: "-100%",marginRight: -400}),
-                                    TweenMax.from('#section-female .laptop-m', 1, {left: "-100%",marginLeft: -400,delay: 0})
-                                ]);
+                    var laptop_animation = new TimelineMax()
+                            .add([
+                                TweenMax.from('#section-female .laptop-f', 1, {right: "-100%",marginRight: -400}),
+                                TweenMax.from('#section-female .laptop-m', 1, {left: "-100%",marginLeft: -400,delay: 0})
+                            ]);
 
 
-                        new ScrollScene({
-                                triggerElement: "#section-female",
-                                duration: 1000
-                            })
-                            .setTween(laptop_animation)
-                            .setPin('#section-female')
-                            .addTo(controller);
-                    });
+                    new ScrollScene({
+                            triggerElement: "#section-female",
+                            duration: 1000
+                        })
+                        .setTween(laptop_animation)
+                        .setPin('#section-female')
+                        .addTo(controller);
                 </script>
 
             </div>
@@ -274,79 +320,75 @@
             <div class="tickets"></div>
 
             <script>
-                $(function(){
+                var section_months = $('#section-months');
 
-                    var section_months = $('#section-months');
-
-                    section_months.css({height:'100%'});
-                    chart = $('.chart .progress', section_months);
-                    $('.dates, .benefits, .retention', section_months).css({position: 'absolute', top: 0});
-                    $('.months li', section_months).css({position: 'absolute'});
+                section_months.css({height:'100%'});
+                chart = $('.chart .progress', section_months);
+                $('.dates, .benefits, .retention', section_months).css({position: 'absolute', top: 0});
+                $('.months li', section_months).css({position: 'absolute'});
 
 //                    console.log($('.dates-2013 .year', section_months));
 //                    console.log($('.dates-2013 .months li:first-child', section_months));
 
-                    var months_animation = new TimelineMax()
-                            .add([
-                                TweenMax.from($('.dates-2013 .year', section_months), 0.5, {top: "100%"}),
-                                TweenMax.from($('.dates-2013 .months li:first-child', section_months), 0.5, {top: "100%"}),
-                                TweenMax.to(chart, 0.5, {height: $('.dates-2013 .months li:first-child', section_months).data('progress')+'%' })
-                            ]);
-
-                    var months_2013 = $('.dates-2013 .months li');
-
-                    $(months_2013).each(function(index){
-                        if ( index == 0 ) return true;
-                        console.log(months_2013[index]);
-                        months_animation.add([
-                            TweenMax.to(months_2013[index - 1], 0.5, {top: "-100%"}),
-                            TweenMax.from(months_2013[index], 0.5, {top:"100%"}),
-                            TweenMax.to(chart, 0.5, {height: $(this).data('progress')+'%' })
+                var months_animation = new TimelineMax()
+                        .add([
+                            TweenMax.from($('.dates-2013 .year', section_months), 0.5, {top: "100%"}),
+                            TweenMax.from($('.dates-2013 .months li:first-child', section_months), 0.5, {top: "100%"}),
+                            TweenMax.to(chart, 0.5, {height: $('.dates-2013 .months li:first-child', section_months).data('progress')+'%' })
                         ]);
-                    });
 
+                var months_2013 = $('.dates-2013 .months li');
+
+                $(months_2013).each(function(index){
+                    if ( index == 0 ) return true;
                     months_animation.add([
-                        TweenMax.to($('.dates-2013 .year', section_months), 0.5, {top: "-100%"}),
-                        TweenMax.to($('.dates-2013 .months li:last-child', section_months), 0.5, {top: "-100%"}),
-                        TweenMax.from($('.dates-2014 .year', section_months), 0.5, {top: "100%"}),
-                        TweenMax.from($('.dates-2014 .months li:first-child', section_months), 0.5, {top: "100%"}),
-                        TweenMax.to(chart, 0.5, {height: $('.dates-2014 .months li:first-child', section_months).data('progress')+'%' })
+                        TweenMax.to(months_2013[index - 1], 0.5, {top: "-100%"}),
+                        TweenMax.from(months_2013[index], 0.5, {top:"100%"}),
+                        TweenMax.to(chart, 0.5, {height: $(this).data('progress')+'%' })
                     ]);
+                });
 
-                    var months_2014 = $('.dates-2014 .months li');
+                months_animation.add([
+                    TweenMax.to($('.dates-2013 .year', section_months), 0.5, {top: "-100%"}),
+                    TweenMax.to($('.dates-2013 .months li:last-child', section_months), 0.5, {top: "-100%"}),
+                    TweenMax.from($('.dates-2014 .year', section_months), 0.5, {top: "100%"}),
+                    TweenMax.from($('.dates-2014 .months li:first-child', section_months), 0.5, {top: "100%"}),
+                    TweenMax.to(chart, 0.5, {height: $('.dates-2014 .months li:first-child', section_months).data('progress')+'%' })
+                ]);
 
-                    $(months_2014).each(function(index){
-                        if ( index == 0 ) return true;
-                        months_animation.add([
-                            TweenMax.to(months_2014[index - 1], 0.5, {top: "-100%"}),
-                            TweenMax.from(months_2014[index], 0.5, {top:"100%"}),
-                            TweenMax.to(chart, 0.5, {height: $(this).data('progress')+'%' })
-                        ]);
-                    });
+                var months_2014 = $('.dates-2014 .months li');
 
+                $(months_2014).each(function(index){
+                    if ( index == 0 ) return true;
                     months_animation.add([
-                        TweenMax.to($('.dates-2014 .year', section_months), 0.5, {top: "-100%"}),
-                        TweenMax.to($('.dates-2014 .months li:last-child', section_months), 0.5, {top: "-100%"})
+                        TweenMax.to(months_2014[index - 1], 0.5, {top: "-100%"}),
+                        TweenMax.from(months_2014[index], 0.5, {top:"100%"}),
+                        TweenMax.to(chart, 0.5, {height: $(this).data('progress')+'%' })
                     ]);
+                });
 
-                    months_animation.add(TweenMax.from('#section-months .benefits', 0.8, {autoAlpha: 0}));
-                    months_animation.add(TweenMax.to('#section-months .benefits', 0.8, {autoAlpha: 0}));
-                    months_animation.add(TweenMax.from('#section-months .retention', 0.8, {autoAlpha: 0}));
+                months_animation.add([
+                    TweenMax.to($('.dates-2014 .year', section_months), 0.5, {top: "-100%"}),
+                    TweenMax.to($('.dates-2014 .months li:last-child', section_months), 0.5, {top: "-100%"})
+                ]);
 
-                    months_animation.add(TweenMax.to('#section-months .tickets', 1, {bottom: 0}));
+                months_animation.add(TweenMax.from('#section-months .benefits', 0.8, {autoAlpha: 0}));
+                months_animation.add(TweenMax.to('#section-months .benefits', 0.8, {autoAlpha: 0}));
+                months_animation.add(TweenMax.from('#section-months .retention', 0.8, {autoAlpha: 0}));
+
+                months_animation.add(TweenMax.to('#section-months .tickets', 1, {bottom: 0}));
 
 //                    .add(TweenMax.from("#section-retention .ticket", 1, {marginTop: "100%"}))
 //                    .add(TweenMax.to("#section-retention", 1, {backgroundPosition: "0 100%"}));
 
-                    // pin
-                    new ScrollScene({
-                            triggerElement: "#section-months",
-                            duration: 6000
-                        })
-                        .setTween(months_animation)
-                        .setPin("#section-months")
-                        .addTo(controller);
-                });
+                // pin
+                new ScrollScene({
+                        triggerElement: "#section-months",
+                        duration: 6000
+                    })
+                    .setTween(months_animation)
+                    .setPin("#section-months")
+                    .addTo(controller);
             </script>
 
         </section>
@@ -363,23 +405,20 @@
             </div>
 
             <script>
-                $(function(){
-                    var books = $('#section-mentor-books .book');
+                var books = $('#section-mentor-books .book');
 
-                    var book_animation = new TimelineMax()
-                            .add(TweenMax.from(books[2], 1, {top: "-10%", ease: Bounce.easeOut, delay: 0.2}))
-                            .add(TweenMax.from(books[1], 1, {top: "-10%", ease: Bounce.easeOut, delay: 0.2}))
-                            .add(TweenMax.from(books[0], 1, {top: "-10%", ease: Bounce.easeOut, delay: 0.2}))
+                var book_animation = new TimelineMax()
+                        .add(TweenMax.from(books[2], 1, {top: "-10%", ease: Bounce.easeOut, delay: 0.2}))
+                        .add(TweenMax.from(books[1], 1, {top: "-10%", ease: Bounce.easeOut, delay: 0.2}))
+                        .add(TweenMax.from(books[0], 1, {top: "-10%", ease: Bounce.easeOut, delay: 0.2}))
 
-                    new ScrollScene({
-                        triggerElement: $("#section-mentor-books"),
-                        duration: 1000
-                    })
-                    .setTween(book_animation)
-                    .setPin($('#section-mentor-books'))
-                    .addTo(controller);
-
-                });
+                new ScrollScene({
+                    triggerElement: $("#section-mentor-books"),
+                    duration: 1000
+                })
+                .setTween(book_animation)
+                .setPin($('#section-mentor-books'))
+                .addTo(controller);
             </script>
 
         </section>
@@ -406,22 +445,19 @@
             </div>
 
             <script>
-                $(function() {
-                    var quotes = $('#section-mentor-heros .quote');
+                var quotes = $('#section-mentor-heros .quote');
 
-                    var hero_animation = new TimelineMax()
-                            .add(TweenMax.from('#section-mentor-heros .hero', 1, {left: "150%", top: '100%', ease: Back.easeOut}))
-                            .add(TweenMax.staggerFrom(quotes, 1, {autoAlpha: 0}, 0.1));
+                var hero_animation = new TimelineMax()
+                        .add(TweenMax.from('#section-mentor-heros .hero', 1, {left: "150%", top: '100%', ease: Back.easeOut}))
+                        .add(TweenMax.staggerFrom(quotes, 1, {autoAlpha: 0}, 0.1));
 
-                    new ScrollScene({
-                            triggerElement: '#section-mentor-heros',
-                            duration: 1000
-                        })
-                        .setTween(hero_animation)
-                        .setPin('#section-mentor-heros')
-                        .addTo(controller);
-
-                });
+                new ScrollScene({
+                        triggerElement: '#section-mentor-heros',
+                        duration: 1000
+                    })
+                    .setTween(hero_animation)
+                    .setPin('#section-mentor-heros')
+                    .addTo(controller);
             </script>
 
         </section>
@@ -433,21 +469,18 @@
             <code>&lt;/report&gt;</code>
 
             <script>
-                $(document).ready(function($) {
-                    var code_close = $('#section-report-close code');
+                var code_close = $('#section-report-close code');
 
-                    // text properties
-                    var sceneOptions = {duration: 200, offset: -100};
-                    $(code_close).wrapEach(/&[a-z0-9]+;|(.)/ig, "<span>$&</span>");// wrap letters
-                    $(code_close).find('span').hide();
-                    //$(code_open).find('span').css({color: 'blue'});
-                    new ScrollScene()
-                            .addTo(controller)
-                            .triggerHook("onCenter")
-                            .triggerElement(code_close)
-                            .setTween(TweenMax.staggerTo($(code_close).children("span"), 0.0001, {display: "inline"}, 0.1));
-
-                });
+                // text properties
+                var sceneOptions = {duration: 200, offset: -100};
+                $(code_close).wrapEach(/&[a-z0-9]+;|(.)/ig, "<span>$&</span>");// wrap letters
+                $(code_close).find('span').hide();
+                //$(code_open).find('span').css({color: 'blue'});
+                new ScrollScene()
+                        .addTo(controller)
+                        .triggerHook("onCenter")
+                        .triggerElement(code_close)
+                        .setTween(TweenMax.staggerTo($(code_close).children("span"), 0.0001, {display: "inline"}, 0.1));
             </script>
 
         </section>
@@ -472,25 +505,21 @@
             </div>
 
             <script>
-                $(function() {
+                var bubble = $('#section-share .bubble');
 
-                    var bubble = $('#section-share .bubble');
-
-                    new ScrollScene({
-                                offset: -300
-                            })
-                            .setTween(TweenMax.from(bubble, 1, {
-                                autoAlpha: 0,
-                                left: "-=60",
-                                top: "+=50",
-                                scale: 0.2,
-                                ease: Elastic.easeOut
-                            }))
-                            .triggerHook("onCenter")
-                            .triggerElement(bubble)
-                            .addTo(controller);
-
-                });
+                new ScrollScene({
+                            offset: -300
+                        })
+                        .setTween(TweenMax.from(bubble, 1, {
+                            autoAlpha: 0,
+                            left: "-=60",
+                            top: "+=50",
+                            scale: 0.2,
+                            ease: Elastic.easeOut
+                        }))
+                        .triggerHook("onCenter")
+                        .triggerElement(bubble)
+                        .addTo(controller);
             </script>
 
         </section>
