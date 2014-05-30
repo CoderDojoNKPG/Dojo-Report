@@ -700,6 +700,36 @@ section {
       float: right;
       margin-right: 60px; }
 
+#section-logos {
+  position: relative;
+  text-align: center; }
+  #section-logos .supported-by {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    margin-top: -120px;
+    background: #fff;
+    padding: 40px 0; }
+  #section-logos h3 {
+    margin-top: 0;
+    font-size: 25px;
+    text-align: center; }
+  #section-logos .logos {
+    display: inline-block;
+    list-style: none;
+    margin: 0;
+    padding: 0; }
+    #section-logos .logos li {
+      display: block;
+      margin: 0;
+      padding: 0;
+      float: left;
+      width: 25%;
+      text-align: center; }
+      #section-logos .logos li img {
+        display: inline-block;
+        max-width: 90%; }
+
 #section-share {
   background: #f1ede1; }
   #section-share .mobile-canvas {
