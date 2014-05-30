@@ -731,6 +731,7 @@ section {
         max-width: 90%; }
 
 #section-share {
+  position: relative;
   background: #f1ede1; }
   #section-share .mobile-canvas {
     position: absolute;
@@ -750,6 +751,7 @@ section {
       left: 238px; }
   #section-share .share {
     position: absolute;
+    overflow: hidden;
     width: 100%;
     bottom: 80px;
     text-align: center; }
@@ -762,6 +764,14 @@ section {
       display: inline-block; }
     #section-share .share .facebook .fb-share-button {
       top: -8px; }
+  #section-share .download-link {
+    position: absolute;
+    right: 0;
+    bottom: 0px;
+    width: 180px;
+    height: 200px;
+    background: url(../img/download.png) top left no-repeat;
+    text-indent: -99999px; }
 
 .clearfix:before, .clearfix:after {
   content: " ";

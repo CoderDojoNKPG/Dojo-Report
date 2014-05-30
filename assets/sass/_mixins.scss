@@ -106,6 +106,10 @@
 // CSS3 PROPERTIES
 // --------------------------------------------------
 
+@mixin border-radius($radius) {
+  border-radius: $radius;
+}
+
 // Single side border-radius
 @mixin border-top-radius($radius) {
   border-top-right-radius: $radius;

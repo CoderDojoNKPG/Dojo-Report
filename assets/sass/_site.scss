@@ -397,6 +397,7 @@ $book-top: 300px;
 }
 
 #section-share {
+  position: relative;
   background: $brand-secondary;
   .mobile-canvas {
     position: absolute;
@@ -418,6 +419,7 @@ $book-top: 300px;
   }
   .share {
     position: absolute;
+    overflow: hidden;
     width: 100%;
     bottom: 80px;
     text-align: center;
@@ -436,5 +438,14 @@ $book-top: 300px;
         top: -8px;
       }
     }
+  }
+  .download-link {
+    position: absolute;
+    right: 0;
+    bottom: 0px;
+    width: 180px;
+    height: 200px;
+    background: url(../img/download.png) top left no-repeat;
+    text-indent: -99999px;
   }
 }
