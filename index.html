@@ -339,72 +339,85 @@
 
             <script>
                 var section_months = $('#section-months');
-
                 section_months.css({height:'100%'});
-                chart = $('.chart .progress', section_months);
+
                 $('.dates, .benefits, .retention', section_months).css({position: 'absolute', top: 0});
                 $('.months li', section_months).css({position: 'absolute'});
 
-//                    console.log($('.dates-2013 .year', section_months));
-//                    console.log($('.dates-2013 .months li:first-child', section_months));
+                var dates = $('.dates', section_months);
+                var chart_height = $('.chart', section_months).height();
+                var chart = $('.chart .progress', section_months);
 
-                var months_animation = new TimelineMax()
-                        .add([
-                            TweenMax.from($('.dates-2013 .year', section_months), 0.5, {top: "100%"}),
-                            TweenMax.from($('.dates-2013 .months li:first-child', section_months), 0.5, {top: "100%"}),
-                            TweenMax.to(chart, 0.5, {height: $('.dates-2013 .months li:first-child', section_months).data('progress')+'%' })
+                function stickman_chart_percentage(percentage)
+                {
+                    return Math.ceil( chart_height * ( percentage / 100 ) );
+                }
+
+                var dates_animation = new TimelineMax();
+
+                dates.each(function(year_number, year) {
+
+                    var year_title = $('.year', year);
+                    var months = $('.months li', year);
+                    var previous_year = ( typeof dates[year_number - 1] != 'undefined' ? dates[year_number - 1] : false );
+                    var next_year = ( typeof dates[year_number + 1] != 'undefined' ? dates[year_number + 1] : false );
+
+                    var year_animation = [];
+
+                    if ( previous_year ) {
+                        year_animation.push(
+                            TweenMax.to($('.year',previous_year), 0.5, {top: "-50%"}),
+                            TweenMax.to($('.months li:last-child', previous_year), 0.5, {top: "-50%"})
+                        );
+                    }
+
+                    year_animation.push(
+                        TweenMax.from(year_title, 0.5, {top: "100%"}),
+                        TweenMax.from(months.first(), 0.5, {top: "100%"}),
+                        TweenMax.to(chart, 0.5, {height: stickman_chart_percentage(months.first().data('progress'))})
+                    );
+
+                    dates_animation.add(year_animation);
+
+                    months.each(function(month_number, month){
+
+                        if ( month_number == 0 ) return;
+
+                        var previous_month = months[month_number - 1];
+
+                        dates_animation.add([
+                            TweenMax.to(previous_month, 0.5, {top: "-50%"}),
+                            TweenMax.from(month, 0.5, {top:"100%"}),
+                            TweenMax.to(chart, 0.5, {height: stickman_chart_percentage($(month).data('progress')) })
                         ]);
 
-                var months_2013 = $('.dates-2013 .months li');
+                    });
 
-                $(months_2013).each(function(index){
-                    if ( index == 0 ) return true;
-                    months_animation.add([
-                        TweenMax.to(months_2013[index - 1], 0.5, {top: "-100%"}),
-                        TweenMax.from(months_2013[index], 0.5, {top:"100%"}),
-                        TweenMax.to(chart, 0.5, {height: $(this).data('progress')+'%' })
-                    ]);
+                    if ( ! next_year ) {
+
+                        dates_animation.add([
+                            TweenMax.to(year_title, 0.5, {top:"-50%"}),
+                            TweenMax.to(months.last(), 0.5, {top:"-50%"})
+                        ]);
+
+                    }
+
                 });
 
-                months_animation.add([
-                    TweenMax.to($('.dates-2013 .year', section_months), 0.5, {top: "-100%"}),
-                    TweenMax.to($('.dates-2013 .months li:last-child', section_months), 0.5, {top: "-100%"}),
-                    TweenMax.from($('.dates-2014 .year', section_months), 0.5, {top: "100%"}),
-                    TweenMax.from($('.dates-2014 .months li:first-child', section_months), 0.5, {top: "100%"}),
-                    TweenMax.to(chart, 0.5, {height: $('.dates-2014 .months li:first-child', section_months).data('progress')+'%' })
-                ]);
+                dates_animation.add(TweenMax.from('#section-months .benefits', 0.8, {autoAlpha: 0}));
+                dates_animation.add(TweenMax.to('#section-months .benefits', 0.8, {autoAlpha: 0}));
+                dates_animation.add(TweenMax.from('#section-months .retention', 0.8, {autoAlpha: 0}));
 
-                var months_2014 = $('.dates-2014 .months li');
-
-                $(months_2014).each(function(index){
-                    if ( index == 0 ) return true;
-                    months_animation.add([
-                        TweenMax.to(months_2014[index - 1], 0.5, {top: "-100%"}),
-                        TweenMax.from(months_2014[index], 0.5, {top:"100%"}),
-                        TweenMax.to(chart, 0.5, {height: $(this).data('progress')+'%' })
-                    ]);
-                });
-
-                months_animation.add([
-                    TweenMax.to($('.dates-2014 .year', section_months), 0.5, {top: "-100%"}),
-                    TweenMax.to($('.dates-2014 .months li:last-child', section_months), 0.5, {top: "-100%"})
-                ]);
-
-                months_animation.add(TweenMax.from('#section-months .benefits', 0.8, {autoAlpha: 0}));
-                months_animation.add(TweenMax.to('#section-months .benefits', 0.8, {autoAlpha: 0}));
-                months_animation.add(TweenMax.from('#section-months .retention', 0.8, {autoAlpha: 0}));
-
-                months_animation.add(TweenMax.to('#section-months .tickets', 1, {bottom: 0}));
-
-//                    .add(TweenMax.from("#section-retention .ticket", 1, {marginTop: "100%"}))
-//                    .add(TweenMax.to("#section-retention", 1, {backgroundPosition: "0 100%"}));
+                dates_animation.add(TweenMax.to('#section-months .tickets', 1, {bottom: 0}));
+                dates_animation.add(TweenMax.from("#section-retention .ticket", 1, {marginTop: "100%"}))
+                dates_animation.add(TweenMax.to("#section-retention", 1, {backgroundPosition: "0 100%"}));
 
                 // pin
                 new ScrollScene({
                         triggerElement: "#section-months",
-                        duration: 6000
+                        duration: 5500
                     })
-                    .setTween(months_animation)
+                    .setTween(dates_animation)
                     .setPin("#section-months")
                     .addTo(controller);
             </script>

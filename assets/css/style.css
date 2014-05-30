@@ -688,6 +688,8 @@ section {
     margin-left: -186px; }
   #section-mentor-heros .quote {
     display: block;
+    position: relative;
+    z-index: 200;
     width: 260px;
     font-size: 17px; }
     #section-mentor-heros .quote:nth-child(even) {
