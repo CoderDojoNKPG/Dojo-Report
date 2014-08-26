@@ -10,33 +10,48 @@
 
     <title>Coderdojo Scotland</title>
 
+    <!--Google Webfonts (google.com/fonts) is a good source for modern web-friendly fonts-->
     <link href='http://fonts.googleapis.com/css?family=Arvo:700|Nunito:400,700|Open+Sans:400,600' rel='stylesheet' type='text/css'>
+
+    <!--We only need to include one css file because we used SASS (sass-lang.com) for compilation-->
     <link rel="stylesheet" href="assets/css/style.css" type="text/css">
 
+    <!--We use jQuery to grab and manipulate the HTML and styles on the page-->
     <script type="text/javascript" src="assets/js/vendor/jquery.min.js"></script>
+
+    <!--Modernizr is included on most modern websites as it allows you to detect features (e.g. touch interface)-->
     <script type="text/javascript" src="assets/js/vendor/modernizr.min.js"></script>
+
+    <!--We use the following (fantastic) third-party scripts for animating the various elements on page-scoll.-->
     <script type="text/javascript" src="assets/js/vendor/TweenMax.min.js"></script>
     <script type="text/javascript" src="assets/js/vendor/ScrollToPlugin.min.js"></script>
     <script type="text/javascript" src="assets/js/vendor/iscroll.js"></script>
     <script type="text/javascript" src="assets/js/vendor/jquery.scrollmagic.min.js"></script>
+
+    <!--Our little helpers javascript file just contains functions that "help" with various functions-->
     <script type="text/javascript" src="assets/js/helpers.js"></script>
 
-    <!-- Only for development -->
-    <script type="text/javascript" src="assets/js/vendor/jquery.scrollmagic.debug.js"></script>
+    <!--That's all. What more were you expecting?-->
 </head>
 <body>
     <div id="wrapper">
         <script>
             var controller;
+
+            // Using Modernizr we can check if the device supports a touch interface
+
             if (Modernizr.touch) {
                 var scroller;
                 $(document).ready(function () {
-                    // wrap for iscroll
+
+                    // Lets wrap the entire page in another element to make it easier to overwrite
+                    // iPad and mobile scroll support
+
                     $("#wrapper")
                             .addClass("scroll-container")
                             .wrapInner('<div class="scroll-content"></div>');
 
-                    // add iScroll
+                    // IScroll lets us overwrite scroll support in touch devices
                     scroller = new IScroll('#wrapper', {
                         scrollX: false,
                         scrollY: true,
@@ -46,47 +61,55 @@
                         probeType: 3
                     });
 
-                    // update container on scroll
+                    // Let's update our animation controller when scrolling
                     scroller.on("scroll", function () {
                         controller.update();
                     });
 
-                    // overwrite scroll position calculation to use child's offset instead of parents scrollTop();
                     controller.scrollPos(function () {
                         return -scroller.y;
                     });
 
-                    // refresh height, so all is included.
+                    // Let's refresh the scroll height so that everything is included.
                     setTimeout(function () {
                         scroller.refresh();
                     }, 0);
 
                     $("#wrapper").on("touchend", "a", function (e) {
-                        // a bit dirty workaround for links not working in iscroll for some reason...
+                        // Sometimes a "dirty" workaround is needed, like the following to fix
+                        // web links not working in the IScroll container for some reason...
                         e.preventDefault();
                         window.location.href = $(this).attr("href");
                     });
 
-                    // manual set height (so height 100% is available within scroll container)
+                    // Manually set height (so height 100% is available within scroll container)
                     $(document).on("orientationchange", function () {
                         $("section, .scrollmagic-pin-spacer, .container")
                                 .css("min-height", $(window).height())
                     });
-                    $(document).trigger("orientationchange"); // trigger to init
+
+                    // Trigger the above event / listener to initialise the different section heights.
+                    $(document).trigger("orientationchange");
                 });
-                // init the controller
+
+            // Initialise our ScrollMagic controller
             controller = new ScrollMagic({
                 container: "#wrapper",
                 globalSceneOptions: {
                     triggerHook: "onLeave"
                 }
             });
+
         } else {
+
+            // Since we aren't using a touch device, none of the above is required.
+
             controller = new ScrollMagic({
                 globalSceneOptions: {
                     triggerHook: "onLeave"
                 }
             });
+
         }
     </script>
 
@@ -99,11 +122,13 @@
                     <h2>Impact Report 2013/2014</h2>
                 </div>
 
+                <!--No image here? We've added it as a background in the CSS-->
                 <div class="logo">
                     Coderdojo Scotland
                 </div>
 
                 <div class="scroll">
+                    <!--The simple line below adds the ▼ icon using FontAwesome-->
                     <i class="fa fa-chevron-down"></i>
                 </div>
 
@@ -124,20 +149,26 @@
             <script>
                 var code_open = $('#section-report-open code');
 
-                // text properties
+
                 var sceneOptions = {duration: 200, offset: -100};
-                $(code_open).wrapEach(/&[a-z0-9]+;|(.)/ig, "<span>$&</span>");// wrap letters
+
+                // We defined the wrapEach function in our helpers.js file
+                // We need to wrap each letter or html entity (like &lt; i.e. <)
+                // in a span html element so we can animate each independently.
+                // Regular expressions frighten us all - but regexr.com is a great reference.
+                $(code_open).wrapEach(/&[a-z0-9]+;|(.)/ig, "<span>$&</span>");
+                // Now lets 'hide' the letters so we can show them individually
                 $(code_open).find('span').hide();
-                //$(code_open).find('span').css({color: 'blue'});
+
                 var scene = new ScrollScene()
                         .addTo(controller)
+                        // Lets trigger the animation when the element is in the center of the page.
                         .triggerHook("onCenter")
                         .triggerElement(code_open)
+                        // Animate each individual <span> that we created above
+                        // (set display to "inline" rather than "none" - i.e. from hidden to normal text)
                         .setTween(TweenMax.staggerTo($(code_open).children("span"), 0.0001, {display: "inline"}, 0.1));
-                        //.setTween(TweenMax.staggerTo($(code_open).children("span"), 0.0001, {color: "red"}, 0.1));
 
-                // show indicators (requires debug extension)
-                //scene.addIndicators();
             </script>
 
         </section>
@@ -151,6 +182,10 @@
                 <div class="column">
 
                     <h3>Locations</h3>
+
+                    <!--dl, dt and dd are rather uncommonly used HTML tags.-->
+                    <!--They are designed for description list, with terms and descriptions.-->
+                    <!--Remember, use the most appropriate element semantically-->
 
                     <dl>
                         <dt>Highland (Inverness/Moray)</dt>
@@ -182,6 +217,7 @@
 
             <script>
                 var map = $('#section-locations .map');
+                // Get a list of locations from the dt and dd elements above
                 var locations = $('#section-locations dt, #section-locations dd');
 
                 var locations_animation = new TimelineMax()
@@ -286,6 +322,11 @@
                     <div class="progress"></div>
                 </div>
 
+                <!--We use the HTML5 data-* attribute below so that our javascript knows what-->
+                <!--value to use for our nice "person" graph-->
+
+                <!--We also wrap each year inside its own div to make it easier to select with jQuery-->
+
                 <div class="dates dates-2013">
                     <p class="year">2013</p>
                     <ul class="months">
@@ -361,8 +402,12 @@
 
                 dates.each(function(year_number, year) {
 
+                    // Loop through each year
+
                     var year_title = $('.year', year);
                     var months = $('.months li', year);
+
+                    // Try get the previous and next year if they exist in the dates
                     var previous_year = ( typeof dates[year_number - 1] != 'undefined' ? dates[year_number - 1] : false );
                     var next_year = ( typeof dates[year_number + 1] != 'undefined' ? dates[year_number + 1] : false );
 
@@ -384,6 +429,8 @@
                     dates_animation.add(year_animation);
 
                     months.each(function(month_number, month){
+
+                        // Loop through each month
 
                         if ( month_number == 0 ) return;
 
@@ -535,7 +582,7 @@
                 var sceneOptions = {duration: 200, offset: -100};
                 $(code_close).wrapEach(/&[a-z0-9]+;|(.)/ig, "<span>$&</span>");// wrap letters
                 $(code_close).find('span').hide();
-                //$(code_open).find('span').css({color: 'blue'});
+
                 new ScrollScene()
                         .addTo(controller)
                         .triggerHook("onCenter")
@@ -557,7 +604,7 @@
                    <h3>Share our report:</h3>
                     <ul>
                         <li class="twitter"><a href="https://twitter.com/share" class="twitter-share-button" data-text="CoderDojo Scotland Report" data-via="coderscot" data-related="papertank" data-hashtags="coderdojo">Tweet</a></li>
-                        <li class="facebook"><div class="fb-share-button" data-href="http://report.coderdojo.dev" data-type="button_count"></div></li>
+                        <li class="facebook"><div class="fb-share-button" data-type="button_count"></div></li>
                         <li class="google"><div class="g-plus" data-action="share" data-annotation="bubble" data-height="24"></div></li>
                     </ul>
                 </div>
@@ -598,7 +645,7 @@
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
         js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&appId=1423048301292672&version=v2.0";
+        js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&appId=496493557111134&version=v2.0";
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
