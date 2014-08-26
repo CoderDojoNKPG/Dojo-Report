@@ -40,6 +40,21 @@ $logo-height: 383px;
   background: $brand-secondary;
   text-align: center;
   min-height: 500px;
+  .report-title {
+    position: absolute;
+    width: 100%;
+    top: 10%;
+    color: $text-color;
+    text-align: center;
+    & > h1 {
+      font-size: $font-size-large * 1.4;
+      margin: 0 0 20px 0;
+    }
+    & > h2 {
+      margin: 0;
+      font-size: $font-size-large;
+    }
+  }
   .logo {
     display: block;
     background: url(../img/logo.png) top left no-repeat;
@@ -51,6 +66,14 @@ $logo-height: 383px;
     width: $logo-width;
     height: $logo-height;
     text-indent: -9999px;
+  }
+  .scroll {
+    position: absolute;
+    bottom: 10%;
+    width: 100%;
+    text-align: center;
+    color: $brand-primary;
+    font-size: 30px;
   }
 }
 
@@ -123,7 +146,8 @@ $logo-height: 383px;
     left: 40px;
     p {
       padding-left: 20px;
-      font-size: $font-size-small;
+      padding-right: 20px;
+      font-size: $font-size-base;
     }
   }
 }
@@ -421,7 +445,7 @@ $book-top: 300px;
     position: absolute;
     overflow: hidden;
     width: 100%;
-    bottom: 80px;
+    bottom: 100px;
     text-align: center;
     h3 {
       font-size: $font-size-large;
@@ -437,6 +461,20 @@ $book-top: 300px;
       .fb-share-button {
         top: -8px;
       }
+    }
+  }
+  .credit {
+    position: absolute;
+    width: 100%;
+    bottom: 30px;
+    text-align: left;
+    a {
+      color: lighten($text-color, 20%);
+      &:hover {
+        color: $text-color;
+        text-decoration: none;
+      }
+      font-size: $font-size-small * 0.75;
     }
   }
   .download-link {

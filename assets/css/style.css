@@ -5,6 +5,7 @@
  *
  */
 /*! normalize.css v2.1.3 | MIT License | git.io/normalize */
+@import url(../css/font-awesome.min.css);
 article,
 aside,
 details,
@@ -459,6 +460,18 @@ section {
   background: #f1ede1;
   text-align: center;
   min-height: 500px; }
+  #section-logo .report-title {
+    position: absolute;
+    width: 100%;
+    top: 10%;
+    color: #5b5b5b;
+    text-align: center; }
+    #section-logo .report-title > h1 {
+      font-size: 35px;
+      margin: 0 0 20px 0; }
+    #section-logo .report-title > h2 {
+      margin: 0;
+      font-size: 25px; }
   #section-logo .logo {
     display: block;
     background: url(../img/logo.png) top left no-repeat;
@@ -470,6 +483,13 @@ section {
     width: 267px;
     height: 383px;
     text-indent: -9999px; }
+  #section-logo .scroll {
+    position: absolute;
+    bottom: 10%;
+    width: 100%;
+    text-align: center;
+    color: #51b2e4;
+    font-size: 30px; }
 
 .section-code .space {
   min-height: 300px; }
@@ -524,7 +544,8 @@ section {
     left: 40px; }
     #section-gender .caption p {
       padding-left: 20px;
-      font-size: 17px; }
+      padding-right: 20px;
+      font-size: 20px; }
 
 #section-female {
   background: #f1ede1;
@@ -753,7 +774,7 @@ section {
     position: absolute;
     overflow: hidden;
     width: 100%;
-    bottom: 80px;
+    bottom: 100px;
     text-align: center; }
     #section-share .share h3 {
       font-size: 25px; }
@@ -764,6 +785,17 @@ section {
       display: inline-block; }
     #section-share .share .facebook .fb-share-button {
       top: -8px; }
+  #section-share .credit {
+    position: absolute;
+    width: 100%;
+    bottom: 30px;
+    text-align: left; }
+    #section-share .credit a {
+      color: #8e8e8e;
+      font-size: 12.75px; }
+      #section-share .credit a:hover {
+        color: #5b5b5b;
+        text-decoration: none; }
   #section-share .download-link {
     position: absolute;
     right: 0;
