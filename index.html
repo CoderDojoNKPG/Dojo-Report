@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="viewport" content="width=900" />
+    <meta name="author"	content="papertank.co.uk" />
+    <meta name="designer" content="papertank.co.uk" />
+
+    <title>Coderdojo Scotland</title>
+
+    <!--Google Webfonts (google.com/fonts) is a good source for modern web-friendly fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Arvo:700|Nunito:400,700|Open+Sans:400,600' rel='stylesheet' type='text/css'>
+
+    <!--We only need to include one css file because we used SASS (sass-lang.com) for compilation-->
+    <link rel="stylesheet" href="assets/css/style.css" type="text/css">
+
+    <!--We use jQuery to grab and manipulate the HTML and styles on the page-->
+    <script type="text/javascript" src="assets/js/vendor/jquery.min.js"></script>
+
+    <!--Modernizr is included on most modern websites as it allows you to detect features (e.g. touch interface)-->
+    <script type="text/javascript" src="assets/js/vendor/modernizr.min.js"></script>
+
+    <!--We use the following (fantastic) third-party scripts for animating the various elements on page-scoll.-->
+    <script type="text/javascript" src="assets/js/vendor/TweenMax.min.js"></script>
+    <script type="text/javascript" src="assets/js/vendor/ScrollToPlugin.min.js"></script>
+    <script type="text/javascript" src="assets/js/vendor/iscroll.js"></script>
+    <script type="text/javascript" src="assets/js/vendor/jquery.scrollmagic.min.js"></script>
+
+    <!--Our little helpers javascript file just contains functions that "help" with various functions-->
+    <script type="text/javascript" src="assets/js/helpers.js"></script>
+
+    <!--That's all. What more were you expecting?-->
+</head>
+<body>
+    <div id="wrapper">
+        <script>
+            var controller;
+
+            // Using Modernizr we can check if the device supports a touch interface
+
+            if (Modernizr.touch) {
+                var scroller;
+                $(document).ready(function () {
+
+                    // Lets wrap the entire page in another element to make it easier to overwrite
+                    // iPad and mobile scroll support
+
+                    $("#wrapper")
+                            .addClass("scroll-container")
+                            .wrapInner('<div class="scroll-content"></div>');
+
+                    // IScroll lets us overwrite scroll support in touch devices
+                    scroller = new IScroll('#wrapper', {
+                        scrollX: false,
+                        scrollY: true,
+                        scrollbars: true,
+                        useTransform: false,
+                        useTransition: false,
+                        probeType: 3
+                    });
+
+                    // Let's update our animation controller when scrolling
+                    scroller.on("scroll", function () {
+                        controller.update();
+                    });
+
+                    controller.scrollPos(function () {
+                        return -scroller.y;
+                    });
+
+                    // Let's refresh the scroll height so that everything is included.
+                    setTimeout(function () {
+                        scroller.refresh();
+                    }, 0);
+
+                    $("#wrapper").on("touchend", "a", function (e) {
+                        // Sometimes a "dirty" workaround is needed, like the following to fix
+                        // web links not working in the IScroll container for some reason...
+                        e.preventDefault();
+                        window.location.href = $(this).attr("href");
+                    });
+
+                    // Manually set height (so height 100% is available within scroll container)
+                    $(document).on("orientationchange", function () {
+                        $("section, .scrollmagic-pin-spacer, .container")
+                                .css("min-height", $(window).height())
+                    });
+
+                    // Trigger the above event / listener to initialise the different section heights.
+                    $(document).trigger("orientationchange");
+                });
+
+            // Initialise our ScrollMagic controller
+            controller = new ScrollMagic({
+                container: "#wrapper",
+                globalSceneOptions: {
+                    triggerHook: "onLeave"
+                }
+            });
+
+        } else {
+
+            // Since we aren't using a touch device, none of the above is required.
+
+            controller = new ScrollMagic({
+                globalSceneOptions: {
+                    triggerHook: "onLeave"
+                }
+            });
+
+        }
+    </script>
+
+        <section id="section-logo">
+
+            <div class="container">
+
+                <div class="report-title">
+                    <h1>Digital Makers Fund</h1>
+                    <h2>Impact Report 2013/2014</h2>
+                </div>
+
+                <!--No image here? We've added it as a background in the CSS-->
+                <div class="logo">
+                    Coderdojo Scotland
+                </div>
+
+                <div class="scroll">
+                    <!--The simple line below adds the ▼ icon using FontAwesome-->
+                    <i class="fa fa-chevron-down"></i>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section id="section-report-open" class="section-code">
+
+            <div class="container">
+
+                <div class="space"></div>
+
+                <code>&lt;report&gt;</code>
+
+            </div>
+
+            <script>
+                var code_open = $('#section-report-open code');
+
+
+                var sceneOptions = {duration: 200, offset: -100};
+
+                // We defined the wrapEach function in our helpers.js file
+                // We need to wrap each letter or html entity (like &lt; i.e. <)
+                // in a span html element so we can animate each independently.
+                // Regular expressions frighten us all - but regexr.com is a great reference.
+                $(code_open).wrapEach(/&[a-z0-9]+;|(.)/ig, "<span>$&</span>");
+                // Now lets 'hide' the letters so we can show them individually
+                $(code_open).find('span').hide();
+
+                var scene = new ScrollScene()
+                        .addTo(controller)
+                        // Lets trigger the animation when the element is in the center of the page.
+                        .triggerHook("onCenter")
+                        .triggerElement(code_open)
+                        // Animate each individual <span> that we created above
+                        // (set display to "inline" rather than "none" - i.e. from hidden to normal text)
+                        .setTween(TweenMax.staggerTo($(code_open).children("span"), 0.0001, {display: "inline"}, 0.1));
+
+            </script>
+
+        </section>
+
+        <section id="section-locations">
+
+            <div class="container">
+
+                <img src="assets/img/map.png" class="map" alt="Map of Scotland" />
+
+                <div class="column">
+
+                    <h3>Locations</h3>
+
+                    <!--dl, dt and dd are rather uncommonly used HTML tags.-->
+                    <!--They are designed for description list, with terms and descriptions.-->
+                    <!--Remember, use the most appropriate element semantically-->
+
+                    <dl>
+                        <dt>Highland (Inverness/Moray)</dt>
+                        <dd>14 dojos, 148 participants</dd>
+
+                        <dt>Stirling</dt>
+                        <dd>6 dojos, 59 participants</dd>
+
+                        <dt>Tayside (Dundee)</dt>
+                        <dd>4 dojos. 30 participants</dd>
+
+                        <dt>Edinburgh</dt>
+                        <dd>12 dojos. 107 participants</dd>
+
+                        <dt>Inverclyde</dt>
+                        <dd>3 dojos. 41 participants</dd>
+
+                        <dt>Glasgow</dt>
+                        <dd>21 dojos. 304 participants</dd>
+
+                        <dt>Livingston</dt>
+                        <dd>6 dojos. 83 participants</dd>
+
+                    </dl>
+
+                </div>
+
+            </div>
+
+            <script>
+                var map = $('#section-locations .map');
+                // Get a list of locations from the dt and dd elements above
+                var locations = $('#section-locations dt, #section-locations dd');
+
+                var locations_animation = new TimelineMax()
+                        .add(TweenMax.from(map, 1, {left: "-500%",marginLeft: -550}))
+                        .add(TweenMax.staggerFrom(locations, 1, {autoAlpha: 0}, 0.1));
+
+                new ScrollScene({
+                        triggerElement: '#section-locations',
+                        duration: 500
+                    })
+                    .setTween(locations_animation)
+                    .setPin($('#section-locations'))
+                    .addTo(controller);
+            </script>
+
+        </section>
+
+        <section id="section-gender">
+
+            <div class="container">
+
+                <img src="assets/img/gender.png" class="gender-split" alt="Gender" />
+
+                <div class="caption">
+
+                    <h3>Gender Divide</h3>
+
+                    <p>
+                        This year the number of girls at our CoderDojos have increased.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <script>
+                var gender_image = $('#section-gender .gender-split');
+                var gender_caption = $('#section-gender .caption');
+
+                var gender_animation = new TimelineMax()
+                        .add(TweenMax.from(gender_image, 1, {autoAlpha: 0}))
+                        .add(TweenMax.from(gender_caption, 1, {autoAlpha: 0}));
+
+
+                new ScrollScene({
+                        triggerElement: "#section-gender",
+                        duration: 1000
+                    })
+                    .setTween(gender_animation)
+                    .setPin($('#section-gender'))
+                    .addTo(controller);
+            </script>
+
+        </section>
+
+        <section id="section-female">
+
+            <div class="container">
+
+                <div class="content">
+
+                    <h4>Female Participation</h4>
+
+                    <p>
+                        Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quis risus eget urna mollis ornare vel eu leo. Donec sed odio dui.
+                    </p>
+
+                </div>
+
+                <div class="laptops">
+                    <img src="assets/img/laptop_f.png" class="laptop-f" alt="Female Laptop" />
+                    <img src="assets/img/laptop_m.png" class="laptop-m" alt="Male Laptop" />
+                </div>
+
+                <script>
+                    var laptop_animation = new TimelineMax()
+                            .add([
+                                TweenMax.from('#section-female .laptop-f', 1, {right: "-100%",marginRight: -400}),
+                                TweenMax.from('#section-female .laptop-m', 1, {left: "-100%",marginLeft: -400,delay: 0})
+                            ]);
+
+
+                    new ScrollScene({
+                            triggerElement: "#section-female",
+                            duration: 1000
+                        })
+                        .setTween(laptop_animation)
+                        .setPin('#section-female')
+                        .addTo(controller);
+                </script>
+
+            </div>
+
+        </section>
+
+        <section id="section-months">
+
+            <div class="container">
+
+                <div class="chart">
+                    <img src="assets/img/stick_man_mask.png" class="mask" alt="Man" />
+                    <div class="progress"></div>
+                </div>
+
+                <!--We use the HTML5 data-* attribute below so that our javascript knows what-->
+                <!--value to use for our nice "person" graph-->
+
+                <!--We also wrap each year inside its own div to make it easier to select with jQuery-->
+
+                <div class="dates dates-2013">
+                    <p class="year">2013</p>
+                    <ul class="months">
+                        <li data-progress="2.59">Apr <small>20 Participants</small></li>
+                        <li data-progress="4.92">May <small>18 Participants</small></li>
+                        <li data-progress="7.51">Jun <small>20 Participants</small></li>
+                        <li data-progress="11.27">Jul <small>29 Participants</small></li>
+                        <li data-progress="20.08">Aug <small>68 Participants</small></li>
+                        <li data-progress="27.20">Sep <small>55 Participants</small></li>
+                        <li data-progress="34.84">Oct <small>59 Participants</small></li>
+                        <li data-progress="49.22">Nov <small>111 Participants</small></li>
+                        <li data-progress="53.89">Dec <small>36 Participants</small></li>
+                    </ul>
+                </div>
+
+                <div class="dates dates-2014">
+                    <p class="year">2014</p>
+                    <ul class="months">
+                        <li data-progress="66.06">Jan <small>94 Participants</small></li>
+                        <li data-progress="72.80">Feb <small>52 Participants</small></li>
+                        <li data-progress="82.12">Mar <small>72 Participants</small></li>
+                        <li data-progress="97.54">Apr <small>119 Participants</small></li>
+                        <li data-progress="100">May <small>19 Participants</small></li>
+                    </ul>
+                </div>
+
+                <div class="benefits">
+
+                    <div class="benefit">
+                        <h2>Benefits</h2>
+                        <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur blandit tempus porttitor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo.</p>
+                    </div>
+
+                    <div class="benefit">
+                        <h2>Benefits</h2>
+                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Nullam id dolor id nibh ultricies vehicula ut id elit. Vestibulum id ligula porta felis euismod semper. Etiam porta sem malesuada magna mollis euismod. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p>
+                    </div>
+
+                </div>
+
+                <div class="retention">
+
+                    <div class="content">
+                        <h2>Retention</h2>
+                        <p>Overall, just over a third (33%) of participants were new to CoderDojos since beginning of March 2014. Conversely, two thirds were ‘repeat’ participants.  CoderDojo Scotland has worked to improve the retention rate for example through sending a personalised email to participants on the same evening as the CoderDojo (getting feedback as well as maintaining awareness) and offering priority booking to those who have already attended a CoderDojo. Some of the participants have become ‘regulars’ as they enjoy the sessions, not only because of the educational content but because of the atmosphere. </p>
+                    </div>
+
+                    <img src="assets/img/ticket.png" class="ticket" alt="Tickets" />
+
+                </div>
+
+            </div>
+
+            <div class="tickets"></div>
+
+            <script>
+                var section_months = $('#section-months');
+                section_months.css({height:'100%'});
+
+                $('.dates, .benefits, .retention', section_months).css({position: 'absolute', top: 0});
+                $('.months li', section_months).css({position: 'absolute'});
+
+                var dates = $('.dates', section_months);
+                var chart_height = $('.chart', section_months).height();
+                var chart = $('.chart .progress', section_months);
+
+                function stickman_chart_percentage(percentage)
+                {
+                    return Math.ceil( chart_height * ( percentage / 100 ) );
+                }
+
+                var dates_animation = new TimelineMax();
+
+                dates.each(function(year_number, year) {
+
+                    // Loop through each year
+
+                    var year_title = $('.year', year);
+                    var months = $('.months li', year);
+
+                    // Try get the previous and next year if they exist in the dates
+                    var previous_year = ( typeof dates[year_number - 1] != 'undefined' ? dates[year_number - 1] : false );
+                    var next_year = ( typeof dates[year_number + 1] != 'undefined' ? dates[year_number + 1] : false );
+
+                    var year_animation = [];
+
+                    if ( previous_year ) {
+                        year_animation.push(
+                            TweenMax.to($('.year',previous_year), 0.5, {top: "-50%"}),
+                            TweenMax.to($('.months li:last-child', previous_year), 0.5, {top: "-50%"})
+                        );
+                    }
+
+                    year_animation.push(
+                        TweenMax.from(year_title, 0.5, {top: "100%"}),
+                        TweenMax.from(months.first(), 0.5, {top: "100%"}),
+                        TweenMax.to(chart, 0.5, {height: stickman_chart_percentage(months.first().data('progress'))})
+                    );
+
+                    dates_animation.add(year_animation);
+
+                    months.each(function(month_number, month){
+
+                        // Loop through each month
+
+                        if ( month_number == 0 ) return;
+
+                        var previous_month = months[month_number - 1];
+
+                        dates_animation.add([
+                            TweenMax.to(previous_month, 0.5, {top: "-50%"}),
+                            TweenMax.from(month, 0.5, {top:"100%"}),
+                            TweenMax.to(chart, 0.5, {height: stickman_chart_percentage($(month).data('progress')) })
+                        ]);
+
+                    });
+
+                    if ( ! next_year ) {
+
+                        dates_animation.add([
+                            TweenMax.to(year_title, 0.5, {top:"-50%"}),
+                            TweenMax.to(months.last(), 0.5, {top:"-50%"})
+                        ]);
+
+                    }
+
+                });
+
+                dates_animation.add(TweenMax.from('#section-months .benefits', 0.8, {autoAlpha: 0}));
+                dates_animation.add(TweenMax.to('#section-months .benefits', 0.8, {autoAlpha: 0}));
+                dates_animation.add(TweenMax.from('#section-months .retention', 0.8, {autoAlpha: 0}));
+
+                dates_animation.add(TweenMax.to('#section-months .tickets', 1, {bottom: 0}));
+                dates_animation.add(TweenMax.from("#section-retention .ticket", 1, {marginTop: "100%"}))
+                dates_animation.add(TweenMax.to("#section-retention", 1, {backgroundPosition: "0 100%"}));
+
+                // pin
+                new ScrollScene({
+                        triggerElement: "#section-months",
+                        duration: 5500
+                    })
+                    .setTween(dates_animation)
+                    .setPin("#section-months")
+                    .addTo(controller);
+            </script>
+
+        </section>
+
+        <section id="section-mentor-books">
+
+            <div class="container">
+
+                <img src="assets/img/book_1.png" class="book" />
+                <img src="assets/img/book_2.png" class="book" alt="Mentors" />
+                <img src="assets/img/book_3.png" class="book" />
+                <img src="assets/img/book_4.png" class="book" />
+
+            </div>
+
+            <script>
+                var books = $('#section-mentor-books .book');
+
+                var book_animation = new TimelineMax()
+                        .add(TweenMax.from(books[2], 1, {top: "-10%", ease: Bounce.easeOut, delay: 0.2}))
+                        .add(TweenMax.from(books[1], 1, {top: "-10%", ease: Bounce.easeOut, delay: 0.2}))
+                        .add(TweenMax.from(books[0], 1, {top: "-10%", ease: Bounce.easeOut, delay: 0.2}))
+
+                new ScrollScene({
+                    triggerElement: $("#section-mentor-books"),
+                    duration: 1000
+                })
+                .setTween(book_animation)
+                .setPin($('#section-mentor-books'))
+                .addTo(controller);
+            </script>
+
+        </section>
+
+        <section id="section-mentor-heros">
+
+            <div class="container">
+
+                <div class="leading">
+                    <h2>Mentors</h2>
+                    <p>Mentors share their enthusiasm of ‘passing on the knowledge’ of digital making to a younger generation. Over the reporting period they have 'donated' an estimated 990 hours of their time.</p>
+                </div>
+
+                <img src="assets/img/supermentor.png" class="hero" alt="Superhero Mentors" />
+
+                <p class="quote">
+                    It’s good to help young people who are interested in programming a) get more experience, b) see what fun/interesting things you can do, and c) talk to people who do it for a living.
+                </p>
+
+                <p class="quote">
+                    "It’s getting in their heads that they can be makers rather than consumers. With the number of jobs in computer science growing and there not being enough qualified people to fill them we need to make a change.  We can't have Scotland left behind in relation to technology.
+                </p>
+
+            </div>
+
+            <script>
+                var quotes = $('#section-mentor-heros .quote');
+
+                var hero_animation = new TimelineMax()
+                        .add(TweenMax.from('#section-mentor-heros .hero', 1, {left: "150%", top: '100%', ease: Back.easeOut}))
+                        .add(TweenMax.staggerFrom(quotes, 1, {autoAlpha: 0}, 0.1));
+
+                new ScrollScene({
+                        triggerElement: '#section-mentor-heros',
+                        duration: 1000
+                    })
+                    .setTween(hero_animation)
+                    .setPin('#section-mentor-heros')
+                    .addTo(controller);
+            </script>
+
+        </section>
+
+        <section id="section-logos">
+
+                <div class="supported-by">
+
+                    <h3>Supported By:</h3>
+
+                    <ul class="logos">
+                        <li>
+                            <a href="http://www.mozilla.org/en-US/foundation/" target="_blank"><img src="assets/img/logos/mozilla.jpg" alt="Mozilla"></a>
+                        </li>
+                        <li>
+                            <a href="http://www.nesta.org.uk/" target="_blank"><img src="assets/img/logos/nesta.jpg" alt="NESTA"></a>
+                        </li>
+                        <li>
+                            <a href="http://www.glasgowsciencecentre.org/" target="_blank"><img src="assets/img/logos/gsc.jpg" alt="Glasgow Science Centre"></a>
+                        </li>
+                        <li>
+                            <a href="http://www.nominettrust.org.uk/" target="_blank"><img src="assets/img/logos/nominet.jpg" alt="Nominet Trust"></a>
+                        </li>
+                    </ul>
+
+                </div>
+
+        </section>
+
+        <section id="section-report-close" class="section-code">
+
+            <div class="space"></div>
+
+            <code>&lt;/report&gt;</code>
+
+            <script>
+                var code_close = $('#section-report-close code');
+
+                // text properties
+                var sceneOptions = {duration: 200, offset: -100};
+                $(code_close).wrapEach(/&[a-z0-9]+;|(.)/ig, "<span>$&</span>");// wrap letters
+                $(code_close).find('span').hide();
+
+                new ScrollScene()
+                        .addTo(controller)
+                        .triggerHook("onCenter")
+                        .triggerElement(code_close)
+                        .setTween(TweenMax.staggerTo($(code_close).children("span"), 0.0001, {display: "inline"}, 0.1));
+            </script>
+
+        </section>
+
+        <section id="section-share">
+
+            <div class="container">
+
+                <div class="mobile-canvas">
+                    <img src="assets/img/twitter.png" class="bubble" />
+                </div>
+
+                <div class="share">
+                   <h3>Share our report:</h3>
+                    <ul>
+                        <li class="twitter"><a href="https://twitter.com/share" class="twitter-share-button" data-text="CoderDojo Scotland Report" data-via="coderscot" data-related="papertank" data-hashtags="coderdojo">Tweet</a></li>
+                        <li class="facebook"><div class="fb-share-button" data-type="button_count"></div></li>
+                        <li class="google"><div class="g-plus" data-action="share" data-annotation="bubble" data-height="24"></div></li>
+                    </ul>
+                </div>
+
+                <div class="credit">
+                    <a href="http://papertank.co.uk" target="_blank">Made by Papertank</a>
+                </div>
+
+            </div>
+
+            <a href="#" class="download-link">
+                Download Report
+            </a>
+
+            <script>
+                var bubble = $('#section-share .bubble');
+
+                new ScrollScene({
+                            offset: -300
+                        })
+                        .setTween(TweenMax.from(bubble, 1, {
+                            autoAlpha: 0,
+                            left: "-=60",
+                            top: "+=50",
+                            scale: 0.2,
+                            ease: Elastic.easeOut
+                        }))
+                        .triggerHook("onCenter")
+                        .triggerElement(bubble)
+                        .addTo(controller);
+            </script>
+
+        </section>
+
+    </div>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&appId=496493557111134&version=v2.0";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    <script type="text/javascript">
+        window.___gcfg = {lang: 'en-GB'};
+
+        (function() {
+            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+            po.src = 'https://apis.google.com/js/platform.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,489 @@
+body, html{
+  height: 100%;
+  width: 100%;
+}
+
+.scroll-container {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  min-width: 850px;
+  width: 100%
+}
+.scroll-content {
+  position: relative;
+}
+
+#wrapper {
+  height: 100%;
+  width: 100%;
+  min-width: 900px;
+  min-height: 500px;
+}
+
+section {
+  height: 100%;
+  width: 100%;
+  .container {
+    height: 100%;
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    @include clearfix();
+  }
+}
+
+$logo-width: 267px;
+$logo-height: 383px;
+
+#section-logo {
+  background: $brand-secondary;
+  text-align: center;
+  min-height: 500px;
+  .report-title {
+    position: absolute;
+    width: 100%;
+    top: 10%;
+    color: $text-color;
+    text-align: center;
+    & > h1 {
+      font-size: $font-size-large * 1.4;
+      margin: 0 0 20px 0;
+    }
+    & > h2 {
+      margin: 0;
+      font-size: $font-size-large;
+    }
+  }
+  .logo {
+    display: block;
+    background: url(../img/logo.png) top left no-repeat;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -(ceil($logo-height / 2));
+    margin-left: -(ceil($logo-width / 2));
+    width: $logo-width;
+    height: $logo-height;
+    text-indent: -9999px;
+  }
+  .scroll {
+    position: absolute;
+    bottom: 10%;
+    width: 100%;
+    text-align: center;
+    color: $brand-primary;
+    font-size: 30px;
+  }
+}
+
+.section-code {
+  .space {
+    min-height: 300px;
+  }
+  code {
+    margin-bottom: 300px;
+  }
+  code {
+    display: block;
+    position: relative;
+    text-align: center;
+    font-size: $font-size-h2;
+    font-family: $font-family-monospace;
+    font-weight: bold;
+  }
+}
+
+#section-report-open {
+  background: $brand-secondary;
+  text-align: center;
+}
+
+#section-locations {
+  background: $brand-primary;
+  color: #fff;
+  .container {
+    padding: 100px 0;
+  }
+  .map {
+    position: absolute;
+  }
+  .column {
+    width: 40%;
+    float: right;
+  }
+  h3 {
+    text-align: right;
+  }
+  dl {
+    text-align: right;
+    margin-right: 30px;
+  }
+  dt {
+    font-family: $font-family-monospace;
+  }
+  dd {
+    margin-bottom: 20px;
+    font-family: $font-family-sans-serif;
+  }
+}
+
+#section-gender {
+  background: $brand-secondary;
+  color: $gray;
+  .container {
+    padding: 100px 0 0 80px;
+    position: relative;
+  }
+  .gender-split {
+    display: block;
+    float: right;
+  }
+  .caption {
+    position: absolute;
+    width: 50%;
+    top: 400px;
+    left: 40px;
+    p {
+      padding-left: 20px;
+      padding-right: 20px;
+      font-size: $font-size-base;
+    }
+  }
+}
+
+#section-female {
+
+  background: $brand-secondary;
+  color: $gray;
+
+
+  .container {
+    padding: 80px 0;
+    position: relative;
+  }
+
+  .content {
+    text-align: center;
+    width: 50%;
+    margin: 0 auto 150px auto;
+    p {
+      font-size: $font-size-small;
+    }
+  }
+
+  .laptops {
+    margin: 0 auto;
+    width: 520px;
+//    height: 380px;
+    position: relative;
+    img {
+      display: block;
+      position: absolute;
+    }
+    .laptop-f {
+      right: 0px;
+      top: 0px;
+    }
+    .laptop-m {
+      left: 0;
+      top: 60px;
+    }
+  }
+
+}
+
+.section-man {
+  .stick-man {
+    position: absolute;
+    top: 150px;
+    left: 50%;
+    margin-left: -(227px / 2);
+  }
+}
+
+#section-months {
+  height: auto;
+  background: $brand-primary;
+  color: #fff;
+  .container {
+    position: relative;
+  }
+  .chart {
+    position: absolute;
+    background: $brand-primary-alt;
+    top: 150px;
+    left: 50%;
+    width: 227px;
+    height: 439px;
+    margin-left: -(227px / 2);
+    .mask {
+      position: absolute;
+      z-index: 200;
+      width: 100%;
+      height: 100%;
+    }
+    .progress {
+      display: block;
+      position: absolute;
+      background: #fff;
+      bottom: 0px;
+      height: 0%;
+      width: 100%;
+      z-index: 100;
+    }
+  }
+  .chart, .dates li, .dates .year {
+    margin-top: 100px;
+  }
+  .dates {
+    padding: 100px 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    font-size: $font-size-h1;
+    font-family: $font-family-monospace;
+    font-weight: bold;
+    color: $brand-primary-alt;
+    text-transform: uppercase;
+  }
+  .year {
+    position: absolute;
+    top: 10%;
+    right: 50px;
+  }
+  .months {
+    margin: 0;
+    li {
+      display: block;
+      margin-bottom: 40px;
+    }
+    small {
+      display: block;
+      font-size: $font-size-base;
+      font-family: $font-family-base;
+      text-transform: none;
+    }
+  }
+  .retention, .benefits {
+    padding-top: 100px;
+  }
+  .benefits {
+    width: 100%;
+    .benefit {
+      display: block;
+      width: 300px;
+      p {
+        margin-left: 10px;
+        font-size: $font-size-small;
+      }
+      float: left;
+      &:nth-of-type(even) {
+        float: right;
+        margin-top: 200px;
+      }
+    }
+  }
+  .retention {
+    width: 100%;
+    .content {
+      float: left;
+      width: 300px;
+      p {
+        font-size: $font-size-small;
+      }
+    }
+    .ticket {
+      display: block;
+      float: right;
+      margin-right: 20px;
+      margin-top: 100px;
+    }
+  }
+  .tickets {
+    background: url(../img/tickets.png) top left repeat-x;
+    width: 100%;
+    height: 402px;
+    display: block;
+    position: absolute;
+    bottom: -402px;
+    left: 0;
+    z-index: 300;
+  }
+}
+
+$book-width: 556px;
+$book-height: 72px;
+$book-top: 300px;
+
+#section-mentor-books {
+  background: $brand-secondary;
+  overflow: hidden;
+  .trigger {
+    position: absolute;
+    left: 50%;
+    top: -10%;
+  }
+  .container {
+    width: $book-width;
+    margin: 0 auto;
+    padding: 100px 0;
+    position: relative;
+  }
+  .book {
+    display: block;
+    position: absolute;
+    width: $book-width;
+    height: $book-height;
+    &:nth-of-type(1) {
+      top: $book-top;
+    }
+    &:nth-of-type(2) {
+      top: $book-top + ( $book-height * 1 );
+    }
+    &:nth-of-type(3) {
+      top: $book-top + ( $book-height * 2 );
+    }
+    &:nth-of-type(4) {
+      top: $book-top + ( $book-height * 3 );
+    }
+  }
+}
+
+#section-mentor-heros {
+  background: $brand-secondary;
+  .container {
+    padding: 100px 0;
+    position: relative;
+  }
+  .leading {
+    width: 300px;
+  }
+  .hero {
+    position: absolute;
+    top: 250px;
+    left: 55%;
+    margin-left: -(372px / 2);
+  }
+  .quote {
+    display: block;
+    position: relative;
+    z-index: 200;
+    width: 260px;
+    font-size: $font-size-small;
+    &:nth-child(even) {
+      float: left;
+      margin-top: 100px;
+      margin-left: 60px;
+    }
+    &:nth-child(odd) {
+      float: right;
+      margin-right: 60px;
+    }
+  }
+}
+
+#section-logos {
+  position: relative;
+  text-align: center;
+  .supported-by {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    margin-top: -120px;
+    background: #fff;
+    padding: 40px 0;
+  }
+  h3 {
+    margin-top: 0;
+    font-size: $font-size-large;
+    text-align: center;
+  }
+  .logos {
+    display: inline-block;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    li {
+      display: block;
+      margin: 0;
+      padding: 0;
+      float: left;
+      width: 25%;
+      text-align: center;
+      img {
+        display: inline-block;
+        max-width: 90%;
+      }
+    }
+  }
+}
+
+#section-share {
+  position: relative;
+  background: $brand-secondary;
+  .mobile-canvas {
+    position: absolute;
+    width: 556px;
+    height: 361px;
+    background: url(../img/iphone.png) top left no-repeat;
+    top: 40%;
+    left: 50%;
+    margin-top: -(361px / 2);
+    margin-left: -(556px / 2);
+    .bubble {
+      display: block;
+      width: 121px;
+      height: 129px;
+      position: absolute;
+      top: -116px;
+      left: 238px;
+    }
+  }
+  .share {
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
+    bottom: 100px;
+    text-align: center;
+    h3 {
+      font-size: $font-size-large;
+    }
+    ul {
+      list-style: none;
+    }
+    li {
+      width: 100px;
+      display: inline-block;
+    }
+    .facebook {
+      .fb-share-button {
+        top: -8px;
+      }
+    }
+  }
+  .credit {
+    position: absolute;
+    width: 100%;
+    bottom: 30px;
+    text-align: left;
+    a {
+      color: lighten($text-color, 20%);
+      &:hover {
+        color: $text-color;
+        text-decoration: none;
+      }
+      font-size: $font-size-small * 0.75;
+    }
+  }
+  .download-link {
+    position: absolute;
+    right: 0;
+    bottom: 0px;
+    width: 180px;
+    height: 200px;
+    background: url(../img/download.png) top left no-repeat;
+    text-indent: -99999px;
+  }
+}

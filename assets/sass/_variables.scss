@@ -1,0 +1,140 @@
+//
+// Variables
+// --------------------------------------------------
+
+
+// Global values
+// --------------------------------------------------
+
+// Grays
+// -------------------------
+
+$gray-darker:            lighten(#000, 13.5%) !default; // #222
+$gray-dark:              #5b5b5b !default;
+$gray:                   #777777 !default;
+$gray-light:             #848484 !default;
+$gray-lighter:           #d3d3d3 !default;
+$almost-white:           #f7f7f7 !default;
+
+// Brand colors
+// -------------------------
+
+$brand-primary:         #51b2e4 !default;
+$brand-primary-alt:     #2f6f9b !default;
+$brand-secondary:       #f1ede1 !default;
+
+//$brand-primary:         transparent !default;
+//$brand-primary-alt:     transparent !default;
+//$brand-secondary:       transparent !default;
+
+// Scaffolding
+// -------------------------
+
+$body-bg:               $brand-secondary !default;
+$text-color:            $gray-dark !default;
+
+// Links
+// -------------------------
+
+$link-color:            #fff !default;
+$link-hover-color:      darken($link-color, 15%) !default;
+
+// Typography
+// -------------------------
+
+$font-family-sans-serif:  "brandon-grotesque", "Helvetica Neue", Helvetica-, Arial, sans-serif !default;
+$font-family-serif:       Georgia, "Times New Roman-", Times, serif !default;
+$font-family-monospace:   "Arvo", Monaco, monospace !default;
+$font-family-base:        $font-family-sans-serif !default;
+
+$font-size-base:          20px !default;
+$font-size-large:         ceil($font-size-base * 1.25) !default;
+$font-size-small:         ceil($font-size-base * 0.85) !default;
+
+$font-size-h1:            80px !default;
+$font-size-h2:            40px !default;
+$font-size-h3:            40px !default;
+$font-size-h4:            $font-size-base !default;
+$font-size-h5:            $font-size-base !default;
+$font-size-h6:            $font-size-base !default;
+
+$line-height-base:        1.428571429 !default; // 20/14
+$line-height-computed:    floor($font-size-base * $line-height-base) !default; // ~20px
+
+$headings-font-family:    $font-family-monospace !default;
+$headings-font-weight:    500 !default;
+$headings-line-height:    1.1 !default;
+$headings-color:          inherit !default;
+
+// Components
+// -------------------------
+// Based on 14px font-size and 1.428 line-height (~20px to start)
+
+$padding-base-vertical:          6px !default;
+$padding-base-horizontal:        12px !default;
+
+$padding-large-vertical:         10px !default;
+$padding-large-horizontal:       16px !default;
+
+$padding-small-vertical:         5px !default;
+$padding-small-horizontal:       10px !default;
+
+$line-height-large:              1.33 !default;
+$line-height-small:              1.5 !default;
+
+$border-radius-base:             4px !default;
+$border-radius-large:            6px !default;
+$border-radius-small:            3px !default;
+
+$component-active-color:         #fff !default;
+$component-active-bg:            $brand-primary !default;
+
+$caret-width-base:               4px !default;
+$caret-width-large:              5px !default;
+
+// Z-index master list
+// -------------------------
+// Used for a bird's eye view of components dependent on the z-axis
+// Try to avoid customizing these :)
+
+$zindex-navbar:            1000 !default;
+$zindex-dropdown:          1000 !default;
+$zindex-popover:           1010 !default;
+$zindex-tooltip:           1030 !default;
+$zindex-navbar-fixed:      1030 !default;
+$zindex-modal-background:  1040 !default;
+$zindex-modal:             1050 !default;
+
+// Media queries breakpoints
+// --------------------------------------------------
+
+// Extra small screen / phone
+// Note: Deprecated $screen-xs and $screen-phone as of v3.0.1
+$screen-xs:                  480px !default;
+$screen-xs-min:              $screen-xs !default;
+$screen-phone:               $screen-xs-min !default;
+
+// Small screen / tablet
+// Note: Deprecated $screen-sm and $screen-tablet as of v3.0.1
+$screen-sm:                  768px !default;
+$screen-sm-min:              $screen-sm !default;
+$screen-tablet:              $screen-sm-min !default;
+
+// Medium screen / desktop
+// Note: Deprecated $screen-md and $screen-desktop as of v3.0.1
+$screen-md:                  992px !default;
+$screen-md-min:              $screen-md !default;
+$screen-desktop:             $screen-md-min !default;
+
+// Large screen / wide desktop
+// Note: Deprecated $screen-lg and $screen-lg-desktop as of v3.0.1
+$screen-lg:                  1200px !default;
+$screen-lg-min:              $screen-lg !default;
+$screen-lg-desktop:          $screen-lg-min !default;
+
+// So media queries don't overlap when required, provide a maximum
+$screen-xs-max:              ($screen-sm-min - 1) !default;
+$screen-sm-max:              ($screen-md-min - 1) !default;
+$screen-md-max:              ($screen-lg-min - 1) !default;
+
+
